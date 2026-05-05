@@ -26,6 +26,36 @@
             opacity: 0.9;
         }
 
+        /* דאונלאוד קנעפל אינגאנצן אויבן רעכטס */
+        .top-download-container {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 1100; /* העכער פונעם העדער */
+        }
+
+        .top-download-btn {
+            background-color: var(--accent-gold);
+            color: var(--primary-blue);
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            border-radius: 50px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .top-download-btn:hover {
+            background-color: transparent;
+            color: var(--accent-gold);
+            transform: scale(1.05);
+        }
+
         .hero { 
             position: relative; height: 60vh; margin-top: 130px; 
             display: flex; align-items: center; justify-content: center; 
@@ -37,22 +67,13 @@
         }
 
         .action-bar { display: flex; justify-content: center; gap: 15px; margin-top: -35px; position: relative; z-index: 100; padding: 0 10px; flex-wrap: wrap; }
-        
         .action-btn { 
             background: var(--accent-gold); color: var(--primary-blue); padding: 14px 28px; 
             border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: 0.3s; 
             display: flex; align-items: center; gap: 10px; border: 2px solid var(--accent-gold); 
         }
-        
-        /* ספעציעלע סטיל פארן דאונלאוד קנעפל עס זאל ארויסשטיין */
-        .download-main-btn {
-            background: var(--primary-blue);
-            color: var(--accent-gold);
-        }
-
         .action-btn:hover { background: var(--primary-blue); color: var(--accent-gold); transform: translateY(-3px); }
-        .download-main-btn:hover { background: var(--accent-gold); color: var(--primary-blue); }
 
         .form-section { padding: 100px 5% 60px; background: var(--white); position: relative; z-index: 5; }
         .form-container { max-width: 750px; margin: 0 auto; background: var(--white); padding: 50px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-top: 4px solid var(--primary-blue); }
@@ -66,21 +87,23 @@
 </head>
 <body>
 
+<!-- דאונלאוד קנעפל אויבן רעכטס -->
+<div class="top-download-container">
+    <a href="guide.pdf" download="Approved_EU_Guide" class="top-download-btn">
+        <i class="fas fa-file-download"></i> PDF GUIDE
+    </a>
+</div>
+
 <header id="main-header">
     <div class="logo"><img src="logo.png" alt="Logo"></div>
     <div class="header-slogan">Expert EU Citizenship Consultancy</div>
 </header>
 
 <section class="hero">
-    <!-- מאכט זיכער אז דער פייל נאמען שטימט אויף GitHub -->
     <video autoplay muted loop playsinline><source src="hero-video.mp4" type="video/mp4"></video>
 </section>
 
 <div class="action-bar">
-    <!-- דא איז דער נייער דאונלאוד קנעפל -->
-    <a href="guide.pdf" download="Approved_EU_Guide" class="action-btn download-main-btn">
-        <i class="fas fa-file-download"></i> DOWNLOAD GUIDE
-    </a>
     <a href="about.html" class="action-btn"><i class="fas fa-info-circle"></i> ABOUT</a>
     <a href="family-tree.html" class="action-btn"><i class="fas fa-tree"></i> FAMILY TREE</a>
     <a href="pay.html" class="action-btn"><i class="fas fa-credit-card"></i> PAYMENT</a>
@@ -114,12 +137,10 @@
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
         let scrollPosition = window.pageYOffset;
-        // האלט דעם העדער אויף זיין פלאץ אויב דו ווילסט נישט ער זאל פארשווינדן
-        if (scrollPosition > 50) {
-            header.style.opacity = "0.95";
-        } else {
-            header.style.opacity = "1";
-        }
+        
+        // דער פאראלאקס עפעקט - מאכט דעם העדער פארשווינדן ביים סקראולין
+        header.style.transform = 'translateY(-' + (scrollPosition * 0.6) + 'px)';
+        header.style.opacity = 1 - (scrollPosition / 300);
     });
 </script>
 
