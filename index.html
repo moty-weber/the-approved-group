@@ -5,62 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Approved EU</title>
     <style>
+        /* יסודות פונעם בלאט */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
             background-color: black;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* קאנטעינער פארן דאונלאוד קנעפל */
+        /* קאנטעינער פארן דאונלאוד קנעפל אויבן רעכטס */
         .download-container {
             position: absolute;
-            top: 25px;
-            right: 25px;
-            z-index: 1000; /* מאכט זיכער עס ליגט העכער אלעס */
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
         }
 
         /* סטיל פארן דאונלאוד קנעפל */
         .download-btn {
-            background-color: #D4AF37; /* גאלד */
-            color: black;
-            padding: 12px 24px;
+            background-color: #D4AF37; /* גאלדענע קאליר */
+            color: #000;
+            padding: 12px 25px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 16px;
-            border-radius: 30px;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+            font-size: 15px;
+            border-radius: 50px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
             transition: all 0.3s ease;
             display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             border: 2px solid transparent;
         }
 
         .download-btn:hover {
-            background-color: black;
+            background-color: #000;
             color: #D4AF37;
             border: 2px solid #D4AF37;
-            transform: translateY(-2px);
+            transform: scale(1.05);
         }
 
-        /* ווידעא סטיל */
+        /* ווידעא הינטערגרונט */
         .video-background {
             position: fixed;
             right: 0;
             bottom: 0;
             min-width: 100%;
             min-height: 100%;
+            width: auto;
+            height: auto;
             z-index: -1;
+            object-fit: cover;
         }
 
-        /* לאגא אין צענטער (אופציאנאל) */
-        .logo-overlay {
+        /* לאגא אין צענטער */
+        .logo-container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+            width: 100%;
+        }
+
+        .logo-container img {
+            max-width: 350px; /* דו קענסט טוישן די סייז לויט דיין טעם */
+            height: auto;
         }
     </style>
 </head>
@@ -68,23 +80,22 @@
 
     <!-- דאונלאוד קנעפל סעקציע -->
     <div class="download-container">
-        <!-- מאכט זיכער אז דער פייל נאמען שטימט מיט וואס דו לאדסט ארויף צו GitHub -->
+        <!-- מאכט זיכער אז דער פייל נאמען אין GitHub איז "guide.pdf" -->
         <a href="guide.pdf" download="Approved_EU_Guide" class="download-btn">
             Download PDF Details
         </a>
     </div>
 
-    <!-- דיין ווידעא הינטערגרונט -->
+    <!-- ווידעא הינטערגרונט - טויש דעם נאמען צו דיין פאקטישן ווידעא פייל -->
     <video autoplay muted loop playsinline class="video-background">
         <source src="your-video.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
+        Your browser does not support the video tag.
     </video>
 
-    <div class="logo-overlay">
-        <!-- דא קענסטו לייגן דיין לאגא בילד -->
-        <img src="logo.png" alt="Approved EU Logo" style="max-width: 300px;">
+    <!-- לאגא סעקציע - טויש דעם נאמען צו דיין פאקטישן לאגא פייל -->
+    <div class="logo-container">
+        <img src="logo.png" alt="Approved EU Logo">
     </div>
 
 </body>
 </html>
-
