@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Search & Display Info (דאָס טוישט נאָר די אינדרויסן) -->
     <title>The Approved Group | EU Immigration Experts</title>
+    <meta name="description" content="The Approved Group offers professional EU citizenship and residency consultancy. Secure your European future with our expert ancestry and immigration services.">
+    
+    <!-- Social Media & WhatsApp בילד -->
+    <meta property="og:title" content="The Approved Group | EU Immigration Experts">
+    <meta property="og:description" content="Expert EU Citizenship Consultancy.">
+    <meta property="og:image" content="https://www.approvedeu.com/logo.png">
+    <meta property="og:url" content="https://www.approvedeu.com">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -26,12 +37,11 @@
             opacity: 0.9;
         }
 
-        /* דאונלאוד קנעפל אינגאנצן אויבן רעכטס */
         .top-download-container {
             position: fixed;
             top: 25px;
             right: 25px;
-            z-index: 1100; /* העכער פונעם העדער */
+            z-index: 1100;
         }
 
         .top-download-btn {
@@ -87,7 +97,6 @@
 </head>
 <body>
 
-<!-- דאונלאוד קנעפל אויבן רעכטס -->
 <div class="top-download-container">
     <a href="guide.pdf" download="Approved_EU_Guide" class="top-download-btn">
         <i class="fas fa-file-download"></i> PDF GUIDE
@@ -137,8 +146,6 @@
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
         let scrollPosition = window.pageYOffset;
-        
-        // דער פאראלאקס עפעקט - מאכט דעם העדער פארשווינדן ביים סקראולין
         header.style.transform = 'translateY(-' + (scrollPosition * 0.6) + 'px)';
         header.style.opacity = 1 - (scrollPosition / 300);
     });
