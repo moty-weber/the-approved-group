@@ -193,6 +193,11 @@
 
         if(inputCode == generatedCode) {
             alert("Identity Verified.");
+            
+            // --- דא איז די נייע שורה וואס סייווט די אימעיל פארן פאמיליע בוים ---
+            localStorage.setItem("user_email", emailField.value);
+            // -----------------------------------------------------------------
+
             emailField.readOnly = true;
             emailField.style.background = "#e9ecef";
             submitBtn.disabled = false;
