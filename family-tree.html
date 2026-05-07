@@ -9,7 +9,7 @@
     <script>(function(){ emailjs.init("Vyn1uEt_qyYpqR5Ux"); })();</script>
 
     <style>
-        :root { --navy: #050c1a; --gold: #d4af37; --light-gold: #fffdf5; --line: #333; }
+        :root { --navy: #050c1a; --gold: #d4af37; --light-gold: #fffdf5; --line: #000000; }
         body { font-family: 'Poppins', sans-serif; background: #f0f2f5; margin: 0; color: var(--navy); overflow-x: hidden; }
         
         .header { padding: 25px 20px; text-align: center; background: var(--navy); color: var(--gold); border-bottom: 3px solid var(--gold); position: relative; }
@@ -22,25 +22,25 @@
         /* קאָמפּאַקטע בוים אויסשטעל */
         .tree-container { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 40px 0 200px; gap: 60px; transform: scale(0.9); transform-origin: top center; }
         
-        .level { display: flex; justify-content: center; width: 100%; position: relative; gap: 20px; }
+        .level { display: flex; justify-content: center; width: 100%; position: relative; gap: 40px; }
         
-        /* די ליניעס - Connectors */
-        .level::after { 
-            content: ""; position: absolute; bottom: -45px; left: 50%; 
+        /* די שוואַרצע ליניעס (Connectors) פֿון דור צו דור */
+        .level::before { 
+            content: ""; position: absolute; top: -45px; left: 50%; 
             width: 2px; height: 45px; background: var(--line); z-index: 1;
         }
-        .level-4::after { display: none; }
+        .level-1::before { display: none; }
 
         .node-group { display: flex; gap: 10px; position: relative; align-items: center; }
         
-        /* האָריזאָנטאַלע ליניע צווישן פּאָר-פֿעלקער */
-        .node-group::before {
-            content: ""; position: absolute; top: 50%; left: 130px; 
+        /* די האָריזאָנטאַלע ליניע צווישן דעם קאָפּל (טאַטע-מאַמע) */
+        .node-group::after {
+            content: ""; position: absolute; top: 50%; left: 140px; 
             width: 10px; height: 2px; background: var(--line); z-index: 1;
         }
 
         .node { 
-            background: white; border: 1px solid #ddd; padding: 10px; width: 135px; 
+            background: white; border: 1px solid #ddd; padding: 10px; width: 140px; 
             border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-bottom: 3px solid #ccc; 
             position: relative; z-index: 5;
         }
@@ -48,11 +48,10 @@
         .node-label { font-size: 8px; font-weight: 800; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; display: block; border-bottom: 1px solid #eee; }
         .node input { width: 100%; border: none; border-bottom: 1px solid #f0f0f0; margin-bottom: 3px; font-size: 9px; outline: none; background: transparent; padding: 1px 0; }
 
-        /* Submission Guide Button */
+        /* Buttons & Modal */
         .top-actions { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
         .action-btn { background: transparent; color: white; border: 1px solid white; padding: 6px 15px; border-radius: 50px; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 0.65rem; text-decoration: none; }
 
-        /* Modal - Long Submission Guide */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(5, 12, 26, 0.9); backdrop-filter: blur(8px); }
         .modal-content { background: white; margin: 40px auto; padding: 40px; width: 85%; max-width: 650px; border-radius: 20px; position: relative; max-height: 75vh; overflow-y: auto; text-align: left; }
         .close-btn { position: absolute; right: 25px; top: 20px; font-size: 30px; cursor: pointer; color: #999; }
@@ -77,7 +76,7 @@
         </div>
         <div id="v-code-area" style="display:none; gap:5px;">
             <input type="text" id="code-v" class="v-input" placeholder="Code">
-            <button class="v-btn" onclick="finishVerify()">OK</button>
+            <button class="v-btn" onclick="finishVerify()">Confirm</button>
         </div>
         <span id="v-success" style="display:none; color: var(--gold); font-weight:bold; font-size:0.75rem;">✓ VERIFIED</span>
     </div>
@@ -134,12 +133,7 @@
         <h2 style="font-family: 'Playfair Display'; border-bottom: 2px solid var(--gold); padding-bottom: 10px;">Submission Guide</h2>
         <div style="font-size: 0.9rem; line-height: 1.6; color: #444; padding-bottom: 20px;">
             <p><strong>The Golden Rule: Follow the Lineage</strong><br>You do not need to fill out every frame. Only document the specific branch through which you are claiming European citizenship.</p>
-            <p><strong>How to Complete the Chart:</strong></p>
-            <ul>
-                <li><strong>The Claim Side (EU SIDE):</strong> Identify the ancestors who carry your bloodline to Europe. Enter details in the frames labeled (EU SIDE).</li>
-                <li><strong>The Spousal Frames:</strong> Enter the spouse of your direct ancestor in the adjacent frame.</li>
-            </ul>
-            <p><strong>Required Information:</strong><br>Full Legal Name, D.O.B & P.O.B, and Marriage Date for couples.</p>
+            <p><strong>Required Details:</strong> Full Name, D.O.B & P.O.B, and Marriage Date.</p>
             <p style="background:#fdf2f2; padding:15px; border-left:4px solid var(--gold); margin-top:20px;"><strong>Expert Note:</strong> Accuracy is vital. Ensure all details match your official certificates.</p>
         </div>
     </div>
@@ -190,7 +184,6 @@
 
     function openGuide() { document.getElementById('guideModal').style.display = 'block'; }
     function closeGuide() { document.getElementById('guideModal').style.display = 'none'; }
-    window.onclick = function(event) { if (event.target == document.getElementById('guideModal')) closeGuide(); }
 </script>
 </body>
 </html>
