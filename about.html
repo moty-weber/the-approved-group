@@ -3,37 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services | Approved Group</title>
+    <title>Our Mission & Heritage | The Approved Group</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; background: #050c1a; color: white; padding: 40px 20px; line-height: 1.6; }
-        .container { max-width: 800px; margin: 0 auto; background: white; color: #333; padding: 40px; border-radius: 20px; }
-        h1, h2 { color: #050c1a; font-family: serif; border-bottom: 2px solid #d4af37; padding-bottom: 10px; }
-        .gold { color: #d4af37; font-weight: bold; }
-        .service-item { margin-bottom: 25px; padding-left: 20px; border-left: 4px solid #d4af37; }
-        .back-home { display: inline-block; margin-top: 30px; color: #d4af37; text-decoration: none; font-weight: bold; }
+        :root { --navy: #050c1a; --gold: #d4af37; --dark-gold: #b8860b; --white: #ffffff; --text-gray: #b0b3b8; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: #02060f; color: var(--white); line-height: 1.8; }
+        
+        header { background: var(--navy); padding: 25px 0; text-align: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .logo-small { width: 220px; }
+        .back-home { position: absolute; left: 30px; top: 35px; color: var(--gold); text-decoration: none; font-weight: 600; font-size: 0.9rem; border: 1px solid var(--gold); padding: 5px 15px; border-radius: 5px; transition: 0.3s; }
+        .back-home:hover { background: var(--gold); color: var(--navy); }
+
+        /* Hero Section */
+        .hero-about { 
+            height: 70vh; background: linear-gradient(rgba(5, 12, 26, 0.85), rgba(5, 12, 26, 0.85)), url('https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px;
+        }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--gold); margin-bottom: 20px; }
+        .hero-content p { max-width: 800px; margin: 0 auto; font-size: 1.3rem; color: var(--text-gray); font-weight: 300; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+
+        /* SECTION: THE VOID & VISION */
+        .section-flex { display: flex; align-items: center; gap: 60px; margin-bottom: 120px; flex-wrap: wrap; }
+        .flex-text { flex: 1; min-width: 350px; }
+        .flex-img { flex: 1; min-width: 350px; position: relative; }
+        .flex-img img { width: 100%; border-radius: 15px; border: 2px solid var(--gold); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+
+        h2.section-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); margin-bottom: 30px; border-left: 5px solid var(--gold); padding-left: 20px; }
+        
+        .highlight-box { background: rgba(212, 175, 55, 0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.2); margin: 30px 0; }
+
+        /* SECTION: POST-HOLOCAUST RIGHTS */
+        .rights-banner { background: var(--navy); padding: 80px 0; text-align: center; border-y: 1px solid var(--gold); margin-bottom: 100px; }
+        .rights-content { max-width: 900px; margin: 0 auto; }
+
+        /* SECTION: OUR GRILL & HARD WORK */
+        .hard-work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 50px; }
+        .work-card { background: var(--glass); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; }
+        .work-card:hover { background: rgba(255,255,255,0.08); border-color: var(--gold); transform: translateY(-10px); }
+        .work-card i { font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; }
+
+        .btn-cta { display: inline-block; background: var(--gold); color: var(--navy); padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 700; margin-top: 40px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .btn-cta:hover { background: var(--white); transform: scale(1.05); }
+
+        footer { text-align: center; padding: 60px 20px; background: var(--navy); border-top: 2px solid var(--gold); font-size: 0.9rem; color: var(--text-gray); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Our Expert Services</h1>
-        <p>At <span class="gold">APPROVED</span>, we specialize in navigating the complex process of inheritance-based citizenship.</p>
-        
-        <div class="service-item">
-            <h3>Ancestry Research</h3>
-            <p>We trace your European lineage to determine eligibility through historical records.</p>
-        </div>
 
-        <div class="service-item">
-            <h3>Document Preparation</h3>
-            <p>Full preparation of application forms and guidance on mandatory paperwork.</p>
-        </div>
+<header>
+    <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> BACK TO HOME</a>
+    <img src="logo.png" alt="The Approved Group" class="logo-small">
+</header>
 
-        <div class="service-item">
-            <h3>Legal Consultation</h3>
-            <p>Access to specialized attorneys for complex cases involving renounced citizenship.</p>
-        </div>
-
-        <a href="index.html" class="back-home">← BACK TO HOMEPAGE</a>
+<section class="hero-about">
+    <div class="hero-content">
+        <h1>Restoring the Legacy</h1>
+        <p>A mission rooted in history, justice, and the future of the Global Jewish Community.</p>
     </div>
+</section>
+
+<div class="container">
+    
+    <div class="section-flex">
+        <div class="flex-text">
+            <h2 class="section-title">The Void We Found</h2>
+            <p>For decades, a significant void existed within our community. Countless families, possessing deep-rooted European heritage, found themselves locked out of their legal rights due to complex bureaucracy, language barriers, and exhausting wait times.</p>
+            <p>We saw the struggle of the <b>Charedi and Orthodox community</b>—families wishing to reconnect with their ancestral homes in Belgium, Poland, and beyond, but held back by the inability to navigate legal systems. We realized that <b>EU Citizenship</b> is not just a document; it is a key to freedom, security, and heritage.</p>
+            <div class="highlight-box">
+                "Our goal was simple: To globalize the access to European Citizenship, ensuring that no Jew has to stand in endless lines or face rejection when claiming their rightful inheritance."
+            </div>
+        </div>
+        <div class="flex-img">
+            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=1000" alt="Legal Consultation">
+        </div>
+    </div>
+
+    <div class="rights-banner">
+        <div class="rights-content">
+            <h2 style="font-family: 'Playfair Display'; color: var(--gold); font-size: 2.5rem;">Legal Restitution & Post-Holocaust Rights</h2>
+            <p style="font-size: 1.1rem; color: var(--text-gray);">History cannot be rewritten, but justice can be restored. Following the tragic events of the Holocaust, many European nations, spearheaded by the EU, implemented simplified laws for the descendants of those displaced or persecuted.</p>
+            <p>Today, these <b>Ancestry Rights</b> allow grandchildren and great-grandchildren to reclaim their European passports without the standard residency requirements. We specialize in identifying these unique legal windows, turning family history into a modern-day asset.</p>
+            <div style="margin-top: 30px;">
+                <i class="fas fa-balance-scale" style="font-size: 3rem; color: var(--gold);"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-flex" style="flex-direction: row-reverse;">
+        <div class="flex-text">
+            <h2 class="section-title">The Value of Every Case</h2>
+            <p>There is a common misconception that obtaining a European passport is a simple administrative task. In reality, it is a <b>legal battle for every single case.</b></p>
+            <p>At <b>The Approved Group</b>, we sweat over every document. We navigate ancient archives in Antwerp, dig through military records in Poland, and engage with high-level legal chambers. Whether it is securing <b>Student Visas</b>, managing <b>Asylum Rights</b>, or finalizing <b>Marriage-based residency</b> in Belgium, we leave no stone unturned.</p>
+            <div class="highlight-box">
+                We understand that for our clients—from students to large families—every month saved in the process is a month of freedom gained.
+            </div>
+        </div>
+        <div class="flex-img">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1000" alt="Hard Work Documentation">
+        </div>
+    </div>
+
+    <h2 style="text-align: center; font-family: 'Playfair Display'; color: var(--gold); font-size: 3rem; margin-top: 50px;">Our Areas of Expertise</h2>
+    <div class="hard-work-grid">
+        <div class="work-card">
+            <i class="fas fa-passport"></i>
+            <h3>Heritage Citizenship</h3>
+            <p>Utilizing family archives to secure passports for descendants of displaced ancestors across the EU.</p>
+        </div>
+        <div class="work-card">
+            <i class="fas fa-user-graduate"></i>
+            <h3>Student & Work Visas</h3>
+            <p>Fast-tracking legal entry for students and professionals looking to establish themselves in Belgium.</p>
+        </div>
+        <div class="work-card">
+            <i class="fas fa-users"></i>
+            <h3>Family Reunification</h3>
+            <p>Helping married couples and families navigate the complex residency laws of the European Union.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 80px;">
+        <h2 style="font-family: 'Playfair Display'; color: var(--white);">Ready to reclaim your heritage?</h2>
+        <a href="index.html" class="btn-cta">Start Your Inquiry Today</a>
+    </div>
+
+</div>
+
+<footer>
+    <img src="logo.png" alt="The Approved Group" style="width: 150px; margin-bottom: 20px; opacity: 0.7;"><br>
+    &copy; 2026 THE APPROVED GROUP | GLOBAL LEGAL CONSULTANCY<br>
+    Providing legal bridges for the global Jewish community.
+</footer>
+
 </body>
 </html>
