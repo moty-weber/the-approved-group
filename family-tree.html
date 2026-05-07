@@ -3,56 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family Tree Assessment | Approved Group</title>
+    <title>Family Tree Structure | The Approved Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; background: #f4f7f9; margin: 0; display: flex; justify-content: center; padding: 40px 20px; }
-        .main-wrapper { max-width: 1100px; display: flex; gap: 30px; flex-wrap: wrap; }
-        .tree-box { flex: 2; background: white; padding: 40px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); text-align: center; }
-        .info-panel { flex: 1; background: #050c1a; color: white; padding: 30px; border-radius: 25px; min-width: 280px; }
-        .node { border: 2px solid #d4af37; padding: 12px; border-radius: 12px; margin: 8px; display: inline-block; width: 210px; background: #fff; }
-        .node label { display: block; font-size: 0.65rem; font-weight: bold; color: #050c1a; text-transform: uppercase; margin-bottom: 4px; }
-        .node input { border: none; width: 100%; text-align: center; outline: none; font-size: 0.9rem; }
-        .connector { width: 2px; height: 20px; background: #d4af37; margin: 0 auto; }
-        .submit-btn { background: #d4af37; color: #050c1a; padding: 20px; width: 100%; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 30px; font-size: 1.1rem; }
-        .email-field { margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px; }
-        .email-field input { width: 80%; padding: 10px; border: 1px solid #d4af37; border-radius: 8px; text-align: center; }
+        :root { --primary: #050c1a; --gold: #d4af37; --white: #ffffff; }
+        body { font-family: 'Poppins', sans-serif; background: #f4f7f9; margin: 0; padding: 0; color: var(--primary); }
+        
+        .container { max-width: 1200px; margin: 60px auto; padding: 20px; text-align: center; }
+        
+        /* Intro Header */
+        .intro-section { margin-bottom: 40px; text-align: center; }
+        .intro-section h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--primary); }
+        .intro-section p { color: #666; max-width: 600px; margin: 0 auto 20px; font-size: 1.1rem; }
+
+        /* The Guide Button */
+        .guide-btn { 
+            background: var(--primary); color: var(--gold); padding: 15px 35px; 
+            border: 2px solid var(--gold); border-radius: 50px; font-weight: bold; 
+            cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .guide-btn:hover { background: var(--gold); color: var(--primary); transform: translateY(-3px); }
+
+        /* Main Tree Display */
+        .tree-wrapper { margin-top: 50px; position: relative; }
+        .tree-image { width: 100%; border-radius: 15px; box-shadow: 0 30px 60px rgba(0,0,0,0.25); border: 1px solid #ddd; }
+
+        /* Modal / Popup Styling */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(5, 12, 26, 0.9); backdrop-filter: blur(8px); }
+        .modal-content { 
+            background: white; margin: 5% auto; padding: 50px; width: 90%; max-width: 750px; 
+            border-radius: 20px; text-align: left; position: relative; 
+            max-height: 85vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.5); 
+        }
+        .close-btn { position: absolute; right: 25px; top: 20px; font-size: 35px; cursor: pointer; color: var(--primary); line-height: 1; }
+        
+        .modal-content h3 { font-family: 'Playfair Display', serif; border-bottom: 3px solid var(--gold); padding-bottom: 15px; font-size: 2rem; margin-top: 0; }
+        .section-header { color: var(--gold); font-weight: 600; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1.5px; display: block; margin: 25px 0 10px; }
+        
+        .modal-content p, .modal-content li { line-height: 1.7; color: #444; font-size: 1.05rem; }
+        .modal-content ul { padding-left: 20px; list-style-type: none; }
+        .modal-content li { margin-bottom: 15px; position: relative; }
+        .modal-content li::before { content: "→"; color: var(--gold); font-weight: bold; position: absolute; left: -25px; }
+        
+        .expert-note { 
+            background: #f9f9f9; padding: 20px; border-left: 4px solid var(--gold); 
+            font-style: italic; margin-top: 30px; font-size: 0.95rem; border-radius: 0 10px 10px 0;
+        }
     </style>
 </head>
 <body>
-    <div class="main-wrapper">
-        <div class="tree-box">
-            <h1 style="font-family: serif; font-size: 2.2rem; margin: 0 0 30px 0;">4-Generation Lineage Tree</h1>
-            <form action="https://formspree.io/f/xdayrong" method="POST">
-                
-                <input type="hidden" name="_subject" value="NEW FAMILY TREE SUBMISSION">
 
-                <div>
-                    <div class="node"><label>Great-GF (EU Side)</label><input type="text" name="GGF" placeholder="Name & Birth Country"></div>
-                    <div class="node"><label>Great-GM (EU Side)</label><input type="text" name="GGM" placeholder="Name & Birth Country"></div>
-                </div>
-                <div class="connector"></div>
-                <div>
-                    <div class="node"><label>Grandfather (EU Line)</label><input type="text" name="GF" placeholder="Name & Birth Country"></div>
-                    <div class="node"><label>Grandmother (EU Line)</label><input type="text" name="GM" placeholder="Name & Birth Country"></div>
-                </div>
-                <div class="connector"></div>
-                <div><div class="node"><label>Father / Mother (EU Line)</label><input type="text" name="Parent" placeholder="Full Name"></div></div>
-                <div class="connector"></div>
-                <div><div class="node" style="border-width: 4px;"><label>Applicant (You)</label><input type="text" name="Applicant" placeholder="Your Full Name" required></div></div>
-                
-                <div class="email-field">
-                    <label style="display:block; font-size:0.8rem; font-weight:bold; margin-bottom:5px;">YOUR EMAIL ADDRESS</label>
-                    <input type="email" name="email" placeholder="email@example.com" required>
-                </div>
+<div class="container">
+    <div class="intro-section">
+        <h2>Family Tree Structure</h2>
+        <p>Map your lineage to establish your European citizenship claim. Accuracy in this document is the foundation of a successful application.</p>
+        <button class="guide-btn" onclick="toggleModal(true)">Read Submission Guide</button>
+    </div>
 
-                <button type="submit" class="submit-btn">SUBMIT LINEAGE FOR REVIEW</button>
-            </form>
-        </div>
-        <div class="info-panel">
-            <h3 style="color: #d4af37;">Why 4 Generations?</h3>
-            <p style="font-size: 0.9rem; line-height: 1.6;">To confirm EU eligibility, we must document your lineage generation by generation. By identifying each ancestor, we can build a strong legal case for your citizenship.</p>
-            <br><a href="index.html" style="color: #d4af37; text-decoration: none;">← Back to Home</a>
+    <div class="tree-wrapper">
+        <img src="Gemini_Generated_Image_xu2sl7xu2sl7xu2s.png" alt="European Ancestry Family Tree" class="tree-image">
+    </div>
+</div>
+
+<div id="guideModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="toggleModal(false)">&times;</span>
+        <h3>Family Tree Submission Guide</h3>
+        
+        <p>To ensure your application is processed correctly, please follow these streamlined instructions:</p>
+
+        <span class="section-header">The Golden Rule: Follow the Lineage</span>
+        <p>You do <strong>not</strong> need to fill out every frame on this chart. You only need to document the specific branch of your family through which you are claiming European citizenship.</p>
+
+        <span class="section-header">How to Complete the Chart</span>
+        <ul>
+            <li><strong>The Claim Side (EU SIDE):</strong> Identify the parent, grandparent, and great-grandparent who carry your direct bloodline to Europe. Enter their details in the frames labeled <strong>(EU SIDE)</strong>.</li>
+            <li><strong>The Spousal Frames:</strong> In each generation, enter the spouse of your direct ancestor in the adjacent frame to complete the couple’s profile.</li>
+            <li><strong>Stop Where the Lineage Ends:</strong> If a certain branch of your family is not relevant to your citizenship claim, you may leave those frames entirely blank.</li>
+        </ul>
+
+        <span class="section-header">Required Information</span>
+        <p>Every completed frame must include official data as it appears on government records:</p>
+        <ul>
+            <li><strong>Full Legal Name:</strong> As written on birth or marriage records.</li>
+            <li><strong>D.O.B & P.O.B:</strong> Date and Place of Birth.</li>
+            <li><strong>Marriage Date:</strong> The legal marriage date for that specific couple.</li>
+        </ul>
+        
+        <div class="expert-note">
+            <strong>Expert Note:</strong> Accuracy is our priority. Ensure all names and dates match your certificates exactly. If any information is missing or unknown, please consult with our team before submitting.
         </div>
     </div>
+</div>
+
+<script>
+    function toggleModal(show) {
+        document.getElementById("guideModal").style.display = show ? "block" : "none";
+    }
+
+    // Close modal if user clicks outside of the content box
+    window.onclick = function(event) {
+        const modal = document.getElementById("guideModal");
+        if (event.target == modal) {
+            toggleModal(false);
+        }
+    }
+</script>
+
 </body>
 </html>
