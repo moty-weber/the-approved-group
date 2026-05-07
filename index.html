@@ -25,9 +25,9 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-bottom: 2px solid var(--accent-gold); 
             position: fixed; width: 100%; top: 0; z-index: 1000; transition: all 0.4s ease;
         }
-        header.scrolled { padding: 10px 0; }
-        .logo img { width: 300px; transition: 0.4s; }
-        header.scrolled .logo img { width: 180px; }
+        header.scrolled { padding: 10px 0; background: rgba(5, 12, 26, 0.95); backdrop-filter: blur(10px); }
+        .logo img { width: 220px; transition: 0.4s; filter: brightness(1.1); }
+        header.scrolled .logo img { width: 160px; }
 
         /* TOP BUTTONS (PDF & VERIFY) */
         .top-btn-container { position: fixed; top: 25px; z-index: 1100; display: flex; gap: 10px; transition: 0.4s; }
@@ -42,40 +42,58 @@
             display: flex; align-items: center; gap: 8px; border: 2px solid var(--accent-gold);
             cursor: pointer; text-transform: uppercase;
         }
-        .luxury-btn.verify { background: var(--primary-blue); color: var(--accent-gold); border: 2px solid var(--accent-gold); }
 
-        /* HERO & ACTION BAR */
-        .hero { position: relative; height: 65vh; margin-top: 150px; display: flex; align-items: center; justify-content: center; background: #000; }
-        .hero video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); object-fit: cover; z-index: 1; }
+        /* VERIFICATION BOX STYLING */
+        .verify-box { background: white; border: 1px solid var(--accent-gold); border-radius: 50px; padding: 5px 15px; display: flex; align-items: center; gap: 8px; box-shadow: 0px 4px 15px rgba(0,0,0,0.2); }
+        .verify-box input { border: none; outline: none; font-size: 0.8rem; width: 160px; font-family: inherit; }
+        .v-small-btn { background: var(--accent-gold); color: var(--primary-blue); border: none; padding: 5px 12px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 0.7rem; }
+
+        /* HERO - FIXED HEIGHT */
+        .hero { position: relative; height: 45vh; margin-top: 130px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #000; }
+        .hero video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); object-fit: cover; z-index: 1; opacity: 0.8; }
+
+        /* ACTION BAR */
         .action-bar { display: flex; justify-content: center; gap: 15px; margin-top: -35px; position: relative; z-index: 100; padding: 0 10px; flex-wrap: wrap; }
-        .action-btn { background: var(--accent-gold); color: var(--primary-blue); padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: 0.3s; display: flex; align-items: center; gap: 10px; border: 2px solid var(--accent-gold); }
+        .action-btn { 
+            background: var(--accent-gold); color: var(--primary-blue); padding: 14px 28px; 
+            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: 0.3s; 
+            display: flex; align-items: center; gap: 10px; border: 2px solid var(--accent-gold); 
+        }
 
         /* FORM SECTION */
-        .form-section { padding: 100px 5% 150px; background: var(--white); }
+        .form-section { padding: 80px 5% 100px; background: var(--white); position: relative; z-index: 5; }
         .form-container { max-width: 750px; margin: 0 auto; background: var(--white); padding: 50px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-top: 4px solid var(--primary-blue); }
-        .field { margin-bottom: 25px; }
+        .field { margin-bottom: 25px; text-align: left; }
         .field label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--primary-blue); font-size: 0.85rem; text-transform: uppercase; }
-        .field input, .field select, .field textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-family: inherit; }
-        .field input[readonly] { background: #f0f2f5; cursor: not-allowed; border-color: #cbd5e1; color: #64748b; font-weight: bold; }
+        .field input, .field select, .field textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-family: inherit; transition: 0.3s; }
+        .field input[readonly] { background: #f4f7f9; cursor: not-allowed; font-weight: bold; color: #555; }
+        
+        .submit-btn { 
+            background: var(--primary-blue); color: var(--accent-gold); padding: 20px; 
+            border-radius: 12px; width: 100%; border: 2px solid var(--accent-gold); 
+            font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1.1rem; text-transform: uppercase; 
+        }
 
-        /* VERIFICATION MODAL */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(5, 12, 26, 0.9); backdrop-filter: blur(8px); }
-        .modal-content { background: white; margin: 10% auto; padding: 40px; width: 90%; max-width: 450px; border-radius: 20px; text-align: center; }
-        .modal-content input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin: 20px 0; font-size: 1.2rem; text-align: center; letter-spacing: 5px; }
-
-        .submit-btn { background: var(--primary-blue); color: var(--accent-gold); padding: 20px; border-radius: 12px; width: 100%; border: 2px solid var(--accent-gold); font-weight: 700; cursor: pointer; font-size: 1.1rem; text-transform: uppercase; }
         footer { background: var(--primary-blue); color: var(--white); padding: 50px 20px; text-align: center; }
     </style>
 </head>
-<body onload="checkSavedEmail()">
+<body onload="checkLocalStorage()">
 
 <div class="top-btn-container left-side">
     <a href="guide.pdf" download class="luxury-btn"><i class="fas fa-file-download"></i> PDF GUIDE</a>
 </div>
 
-<div class="top-btn-container right-side">
-    <button id="header-verify-btn" onclick="openVerifyModal()" class="luxury-btn verify"><i class="fas fa-user-check"></i> VERIFY EMAIL</button>
-    <span id="verified-badge" style="display:none; color: var(--accent-gold); font-weight:bold; font-size:0.9rem; padding: 10px;">✓ VERIFIED</span>
+<div class="top-btn-container right-side" id="verify-wrapper">
+    <div class="verify-box" id="email-step">
+        <input type="email" id="header_email" placeholder="Verify Email First">
+        <button class="v-small-btn" onclick="sendVerificationCode()">Verify</button>
+    </div>
+    <div class="verify-box" id="code-step" style="display:none;">
+        <input type="text" id="auth_code" placeholder="Enter Code">
+        <button class="v-small-btn" onclick="checkCode()">Confirm</button>
+    </div>
+    <span id="verified-badge" style="display:none; color: var(--accent-gold); font-weight:bold; background: var(--primary-blue); padding: 8px 20px; border-radius: 50px; border: 1px solid var(--accent-gold);">✓ VERIFIED</span>
 </div>
 
 <header id="main-header">
@@ -83,7 +101,9 @@
     <div class="header-slogan">Expert EU Citizenship Consultancy</div>
 </header>
 
-<section class="hero"><video autoplay muted loop playsinline><source src="hero-video.mp4" type="video/mp4"></video></section>
+<section class="hero">
+    <video autoplay muted loop playsinline><source src="hero-video.mp4" type="video/mp4"></video>
+</section>
 
 <div class="action-bar">
     <a href="about.html" class="action-btn"><i class="fas fa-info-circle"></i> ABOUT</a>
@@ -97,101 +117,105 @@
         <h2 style="font-family: 'Playfair Display', serif; text-align: center; color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 40px;">Confidential Inquiry</h2>
         
         <form id="contact-form" action="https://formspree.io/f/xdayrong" method="POST">
-            <div class="field"><label>Full Name</label><input type="text" name="name" required></div>
+            <div class="field">
+                <label>Full Name</label>
+                <input type="text" name="name" required>
+            </div>
 
             <div class="field">
-                <label>Email Address (Locked)</label>
-                <input type="email" id="main_user_email" name="email" required readonly placeholder="Please verify email at the top right">
+                <label>Email Address (Verified)</label>
+                <input type="email" id="main_user_email" name="email" required readonly placeholder="Verification required at top right">
             </div>
 
-            <div class="field"><label>Phone Number</label><input type="tel" name="phone" placeholder="+1 (000) 000-0000" required></div>
-            <div class="field"><label>Primary Objective</label>
+            <div class="field">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" placeholder="+1 (000) 000-0000" required>
+            </div>
+
+            <div class="field">
+                <label>Primary Objective</label>
                 <select name="objective" required>
-                    <option value="" disabled selected>Select...</option>
+                    <option value="" disabled selected>Select Inquiry Type...</option>
                     <option value="citizenship">EU Citizenship by Ancestry</option>
-                    <option value="residency">EU Residency</option>
+                    <option value="residency">EU Residency / Work Permits</option>
+                    <option value="consultation">Legal Consultation</option>
                 </select>
             </div>
-            <div class="field"><label>Additional Details</label><textarea name="message" rows="4"></textarea></div>
 
-            <button type="submit" id="main-submit-btn" class="submit-btn" onclick="validateSubmit(event)">SUBMIT INQUIRY</button>
+            <div class="field">
+                <label>Additional Details</label>
+                <textarea name="message" rows="4" placeholder="Briefly describe your case..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" onclick="handleFormSubmit(event)">SUBMIT INQUIRY</button>
         </form>
     </div>
 </section>
 
-<div id="emailModal" class="modal">
-    <div class="modal-content">
-        <h2 id="modal-title">Verify Your Email</h2>
-        <div id="step-1">
-            <input type="email" id="modal-email-input" placeholder="Enter your email" style="letter-spacing: normal;">
-            <button class="luxury-btn" style="width:100%; justify-content:center;" onclick="sendCode()">Send Code</button>
-        </div>
-        <div id="step-2" style="display:none;">
-            <p>Enter 6-digit code sent to your email:</p>
-            <input type="text" id="modal-code-input" placeholder="000000" maxlength="6">
-            <button class="luxury-btn" style="width:100%; justify-content:center;" onclick="confirmCode()">Confirm Identity</button>
-        </div>
-        <button onclick="closeModal()" style="margin-top:20px; background:none; border:none; color:#999; cursor:pointer;">Close</button>
-    </div>
-</div>
-
 <footer>&copy; 2026 THE APPROVED GROUP. ALL RIGHTS RESERVED.</footer>
 
 <script>
-    let generatedCode;
-    let isVerified = false;
-
-    // Header Scroll Effect
+    // Header Scroll Logic
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
         if (window.scrollY > 50) header.classList.add('scrolled');
         else header.classList.remove('scrolled');
     });
 
-    function checkSavedEmail() {
-        const saved = localStorage.getItem("user_email");
-        if (saved) setAsVerified(saved);
+    let generatedCode;
+
+    // Check if email was verified in this session
+    function checkLocalStorage() {
+        const savedEmail = localStorage.getItem("user_email");
+        if (savedEmail) {
+            applyVerification(savedEmail);
+        }
     }
 
-    function openVerifyModal() { document.getElementById('emailModal').style.display = 'block'; }
-    function closeModal() { document.getElementById('emailModal').style.display = 'none'; }
-
-    function sendCode() {
-        const email = document.getElementById('modal-email-input').value;
-        if (!email.includes('@')) { alert("Valid email required"); return; }
+    function sendVerificationCode() {
+        const email = document.getElementById('header_email').value;
+        if(!email || !email.includes('@')) { alert("Please enter a valid email."); return; }
+        
         generatedCode = Math.floor(100000 + Math.random() * 900000);
-        emailjs.send("service_tls7kck", "template_mfhx2ka", { to_email: email, code: generatedCode })
-            .then(() => {
-                document.getElementById('step-1').style.display = 'none';
-                document.getElementById('step-2').style.display = 'block';
-            });
+        
+        emailjs.send("service_tls7kck", "template_mfhx2ka", {
+            to_email: email,
+            code: generatedCode
+        }).then(() => {
+            alert("Code sent to " + email);
+            document.getElementById('email-step').style.display = 'none';
+            document.getElementById('code-step').style.display = 'flex';
+        }, (err) => {
+            alert("Error sending email.");
+        });
     }
 
-    function confirmCode() {
-        const input = document.getElementById('modal-code-input').value;
-        if (input == generatedCode) {
-            const email = document.getElementById('modal-email-input').value;
-            setAsVerified(email);
-            closeModal();
-        } else { alert("Invalid code"); }
+    function checkCode() {
+        const inputCode = document.getElementById('auth_code').value;
+        if(inputCode == generatedCode) {
+            const email = document.getElementById('header_email').value;
+            applyVerification(email);
+        } else {
+            alert("Invalid verification code.");
+        }
     }
 
-    function setAsVerified(email) {
-        isVerified = true;
+    function applyVerification(email) {
         localStorage.setItem("user_email", email);
         document.getElementById('main_user_email').value = email;
-        document.getElementById('header-verify-btn').style.display = 'none';
+        document.getElementById('email-step').style.display = 'none';
+        document.getElementById('code-step').style.display = 'none';
         document.getElementById('verified-badge').style.display = 'block';
     }
 
-    function validateSubmit(e) {
-        if (!isVerified) {
+    function handleFormSubmit(e) {
+        if (!localStorage.getItem("user_email")) {
             e.preventDefault();
-            alert("Email verification required.");
-            window.scrollTo(0, 0);
-            openVerifyModal();
+            alert("Email verification is required before submission.");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 </script>
+
 </body>
 </html>
