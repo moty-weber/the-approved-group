@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ancestry Structure | The Approved Group</title>
+    <title>Ancestry Map | The Approved Group</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -11,168 +11,127 @@
     <script>(function(){ emailjs.init("Vyn1uEt_qyYpqR5Ux"); })();</script>
 
     <style>
-        :root { --primary: #050c1a; --gold: #d4af37; --bg: #f8fafc; --line: #cbd5e1; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; color: var(--primary); }
+        :root { --navy: #050c1a; --gold: #d4af37; --light-gold: #fffdf5; --white: #ffffff; }
+        body { font-family: 'Poppins', sans-serif; background: #f0f2f5; margin: 0; color: var(--navy); overflow-x: hidden; }
         
-        /* Navigation & Header */
-        .header { padding: 40px 20px; text-align: center; background: white; border-bottom: 1px solid #e2e8f0; position: relative; }
-        .back-btn { position: absolute; left: 30px; top: 45px; text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.85rem; border: 1px solid #ddd; padding: 8px 15px; border-radius: 5px; transition: 0.3s; }
-        .back-btn:hover { background: #f4f4f4; }
+        .header { padding: 40px 20px; text-align: center; background: var(--navy); color: var(--gold); border-bottom: 3px solid var(--gold); }
+        .top-actions { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+        .action-btn { background: var(--gold); color: var(--navy); padding: 12px 25px; border-radius: 50px; font-weight: 700; border: none; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; text-decoration: none; }
 
-        .top-actions { display: flex; gap: 12px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
-        .action-btn { background: var(--primary); color: var(--gold); padding: 12px 22px; border-radius: 50px; font-weight: 700; border: 2px solid var(--gold); cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; text-decoration: none; display: inline-block; }
-        .action-btn:hover { background: var(--gold); color: var(--primary); transform: translateY(-2px); }
-        .btn-white { background: white; color: var(--primary); border: 2px solid var(--primary); }
-        .btn-dark { background: #2d3748; border-color: #2d3748; color: white; }
+        /* Tree Container - נוצט א ספעציעלן ID פארן בילד */
+        #capture-area { 
+            padding: 50px; 
+            background: #f0f2f5; 
+            display: flex; 
+            flex-direction: column-reverse; 
+            align-items: center; 
+            gap: 60px; 
+            min-width: 1200px; /* מאכט זיכער אז די בילד ווערט נישט קליין */
+        }
 
-        /* Tree Design */
-        .tree-container { max-width: 1400px; margin: 40px auto; padding: 20px; display: flex; flex-direction: column-reverse; align-items: center; gap: 70px; padding-bottom: 300px; }
-        .level { display: flex; justify-content: center; width: 100%; position: relative; gap: 30px; }
-        .level::after { content: ""; position: absolute; top: -35px; height: 35px; width: 2px; background: var(--line); z-index: 0; }
-        .level-1::after { display: none; }
+        .tree-wrapper { overflow-x: auto; padding-bottom: 300px; }
 
-        .node-group { display: flex; gap: 12px; position: relative; }
-        .node { background: white; border: 1px solid #e2e8f0; padding: 15px; width: 165px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: relative; z-index: 2; }
-        .node.eu-side { border: 2px solid var(--gold); background: #fffdf5; }
+        .level { display: flex; justify-content: center; width: 100%; position: relative; gap: 20px; }
+        .node-group { display: flex; gap: 10px; }
+        
+        .node { 
+            background: white; border: 1px solid #ddd; padding: 15px; width: 160px; 
+            border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-bottom: 4px solid #ccc;
+        }
+        .node.eu-side { border-color: var(--gold); background: var(--light-gold); border-bottom: 4px solid var(--gold); }
         .node-label { font-size: 9px; font-weight: 800; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; display: block; }
         
-        .node input { width: 100%; border: none; border-bottom: 1px solid #f1f5f9; margin-bottom: 5px; font-size: 11px; outline: none; background: transparent; padding: 3px 0; color: var(--primary); }
+        .node input { width: 100%; border: none; border-bottom: 1px solid #eee; margin-bottom: 5px; font-size: 11px; outline: none; background: transparent; }
 
-        /* Modal */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(5, 12, 26, 0.85); backdrop-filter: blur(8px); }
-        .modal-content { background: white; margin: 5% auto; padding: 45px; width: 90%; max-width: 650px; border-radius: 20px; position: relative; max-height: 80vh; overflow-y: auto; text-align: left; }
-        .close-btn { position: absolute; right: 25px; top: 20px; font-size: 30px; cursor: pointer; color: #999; }
-        .guide-text h4 { color: var(--gold); margin: 20px 0 5px; text-transform: uppercase; font-size: 0.9rem; }
-        .guide-text p, .guide-text li { font-size: 0.95rem; line-height: 1.6; color: #444; }
-
-        .submit-section { margin-top: 100px; text-align: center; }
+        .submit-section { text-align: center; margin-top: 50px; padding-bottom: 100px; }
+        .submit-btn { background: var(--navy); color: var(--gold); padding: 20px 80px; border-radius: 50px; font-size: 1.2rem; font-weight: 700; border: 2px solid var(--gold); cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <a href="index.html" class="back-btn">← BACK HOME</a>
-    <h1 style="font-family: 'Playfair Display'; margin:0; font-size: 2.5rem;">Family Tree Structure</h1>
-    
+    <h1 style="font-family: 'Playfair Display'; margin:0;">Ancestry Structure</h1>
     <div class="top-actions">
-        <a href="family-tree-template.jpg" download class="action-btn btn-white">Download Blank JPG</a>
-        
-        <button class="action-btn" onclick="openModal()">Submission Guide</button>
-        
-        <button class="action-btn btn-dark" onclick="downloadTree()">Download My Version</button>
+        <a href="./family-tree-template.jpg" download class="action-btn" style="background:transparent; color:white; border:1px solid white;">Download Blank JPG</a>
+        <button class="action-btn" onclick="downloadFullTree()">Download My Version (Full)</button>
     </div>
 </div>
 
-<div class="tree-container" id="tree-to-print">
-    <form id="family-tree-form" style="width: 100%; display: flex; flex-direction: column-reverse; align-items: center; gap: 70px;">
-        
-        <div class="level level-1">
-            <div class="node eu-side">
-                <span class="node-label">Applicant (Level 1)</span>
-                <input type="text" name="L1_name" placeholder="Full Legal Name">
-                <input type="text" name="L1_dob" placeholder="D.O.B">
-                <input type="text" name="L1_pob" placeholder="P.O.B">
-                <input type="text" name="L1_dom" placeholder="D.O.M">
+<div class="tree-wrapper">
+    <form id="family-tree-form">
+        <div id="capture-area">
+            <div class="level">
+                <div class="node eu-side">
+                    <span class="node-label">Applicant</span>
+                    <input type="text" name="L1_name" placeholder="Name"><input type="text" name="L1_dob" placeholder="DOB"><input type="text" name="L1_pob" placeholder="POB"><input type="text" name="L1_dom" placeholder="DOM">
+                </div>
             </div>
-        </div>
 
-        <div class="level">
-            <div class="node-group">
-                <div class="node eu-side"><span class="node-label">Parent (EU Side)</span><input type="text" name="L2_1_name" placeholder="Name"><input type="text" name="L2_1_dob" placeholder="D.O.B"><input type="text" name="L2_1_pob" placeholder="P.O.B"><input type="text" name="L2_1_dom" placeholder="D.O.M"></div>
-                <div class="node"><span class="node-label" style="color:#94a3b8;">Spouse</span><input type="text" name="L2_2_name" placeholder="Name"><input type="text" name="L2_2_dob" placeholder="D.O.B"><input type="text" name="L2_2_pob" placeholder="P.O.B"><input type="text" name="L2_2_dom" placeholder="D.O.M"></div>
+            <div class="level">
+                <div class="node-group">
+                    <div class="node eu-side"><span class="node-label">Parent (EU)</span><input type="text" name="L2_1_name" placeholder="Name"><input type="text" name="L2_1_dob" placeholder="DOB"><input type="text" name="L2_1_pob" placeholder="POB"><input type="text" name="L2_1_dom" placeholder="DOM"></div>
+                    <div class="node"><span class="node-label">Spouse</span><input type="text" name="L2_2_name" placeholder="Name"><input type="text" name="L2_2_dob" placeholder="DOB"><input type="text" name="L2_2_pob" placeholder="POB"><input type="text" name="L2_2_dom" placeholder="DOM"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="level">
-            <div class="node-group">
-                <div class="node eu-side"><span class="node-label">EU Grandparent</span><input type="text" name="L3_1_name" placeholder="Name"><input type="text" name="L3_1_dob" placeholder="D.O.B"><input type="text" name="L3_1_pob" placeholder="P.O.B"><input type="text" name="L3_1_dom" placeholder="D.O.M"></div>
-                <div class="node"><input type="text" name="L3_2_name" placeholder="Spouse"></div>
+            <div class="level">
+                <div class="node-group">
+                    <div class="node eu-side"><span class="node-label">EU GP</span><input type="text" name="L3_1_name" placeholder="Name"><input type="text" name="L3_1_dob" placeholder="DOB"><input type="text" name="L3_1_pob" placeholder="POB"><input type="text" name="L3_1_dom" placeholder="DOM"></div>
+                    <div class="node"><span class="node-label">Spouse</span><input type="text" name="L3_2_name" placeholder="Name"><input type="text" name="L3_2_dob" placeholder="DOB"><input type="text" name="L3_2_pob" placeholder="POB"><input type="text" name="L3_2_dom" placeholder="DOM"></div>
+                </div>
+                <div class="node-group">
+                    <div class="node eu-side"><span class="node-label">EU GP</span><input type="text" name="L3_3_name" placeholder="Name"><input type="text" name="L3_3_dob" placeholder="DOB"><input type="text" name="L3_3_pob" placeholder="POB"><input type="text" name="L3_3_dom" placeholder="DOM"></div>
+                    <div class="node"><span class="node-label">Spouse</span><input type="text" name="L3_4_name" placeholder="Name"><input type="text" name="L3_4_dob" placeholder="DOB"><input type="text" name="L3_4_pob" placeholder="POB"><input type="text" name="L3_4_dom" placeholder="DOM"></div>
+                </div>
             </div>
-            <div class="node-group">
-                <div class="node eu-side"><span class="node-label">EU Grandparent</span><input type="text" name="L3_3_name" placeholder="Name"><input type="text" name="L3_3_dob" placeholder="D.O.B"><input type="text" name="L3_3_pob" placeholder="P.O.B"><input type="text" name="L3_3_dom" placeholder="D.O.M"></div>
-                <div class="node"><input type="text" name="L3_4_name" placeholder="Spouse"></div>
-            </div>
-        </div>
 
-        <div class="level">
-            <div class="node-group"><div class="node eu-side"><span class="node-label">EU GG-Parent</span><input type="text" name="L4_1_name" placeholder="Name"><input type="text" name="L4_1_dob" placeholder="D.O.B"><input type="text" name="L4_1_pob" placeholder="P.O.B"><input type="text" name="L4_1_dom" placeholder="D.O.M"></div><div class="node"><input type="text" name="L4_2_name" placeholder="Spouse"></div></div>
-            <div class="node-group"><div class="node eu-side"><span class="node-label">EU GG-Parent</span><input type="text" name="L4_3_name" placeholder="Name"><input type="text" name="L4_3_dob" placeholder="D.O.B"><input type="text" name="L4_3_pob" placeholder="P.O.B"><input type="text" name="L4_3_dom" placeholder="D.O.M"></div><div class="node"><input type="text" name="L4_4_name" placeholder="Spouse"></div></div>
-            <div class="node-group"><div class="node eu-side"><span class="node-label">EU GG-Parent</span><input type="text" name="L4_5_name" placeholder="Name"><input type="text" name="L4_5_dob" placeholder="D.O.B"><input type="text" name="L4_5_pob" placeholder="P.O.B"><input type="text" name="L4_5_dom" placeholder="D.O.M"></div><div class="node"><input type="text" name="L4_6_name" placeholder="Spouse"></div></div>
-            <div class="node-group"><div class="node eu-side"><span class="node-label">EU GG-Parent</span><input type="text" name="L4_7_name" placeholder="Name"><input type="text" name="L4_7_dob" placeholder="D.O.B"><input type="text" name="L4_7_pob" placeholder="P.O.B"><input type="text" name="L4_7_dom" placeholder="D.O.M"></div><div class="node"><input type="text" name="L4_8_name" placeholder="Spouse"></div></div>
+            <div class="level">
+                <div class="node-group"><div class="node eu-side"><span class="node-label">EU GGP</span><input type="text" name="L4_1_name" placeholder="Name"><input type="text" name="L4_1_dob" placeholder="DOB"><input type="text" name="L4_1_pob" placeholder="POB"><input type="text" name="L4_1_dom" placeholder="DOM"></div><div class="node"><span class="node-label">Spouse</span><input type="text" name="L4_2_name" placeholder="Name"><input type="text" name="L4_2_dob" placeholder="DOB"><input type="text" name="L4_2_pob" placeholder="POB"><input type="text" name="L4_2_dom" placeholder="DOM"></div></div>
+                <div class="node-group"><div class="node eu-side"><span class="node-label">EU GGP</span><input type="text" name="L4_3_name" placeholder="Name"><input type="text" name="L4_3_dob" placeholder="DOB"><input type="text" name="L4_3_pob" placeholder="POB"><input type="text" name="L4_3_dom" placeholder="DOM"></div><div class="node"><span class="node-label">Spouse</span><input type="text" name="L4_4_name" placeholder="Name"><input type="text" name="L4_4_dob" placeholder="DOB"><input type="text" name="L4_4_pob" placeholder="POB"><input type="text" name="L4_4_dom" placeholder="DOM"></div></div>
+                <div class="node-group"><div class="node eu-side"><span class="node-label">EU GGP</span><input type="text" name="L4_5_name" placeholder="Name"><input type="text" name="L4_5_dob" placeholder="DOB"><input type="text" name="L4_5_pob" placeholder="POB"><input type="text" name="L4_5_dom" placeholder="DOM"></div><div class="node"><span class="node-label">Spouse</span><input type="text" name="L4_6_name" placeholder="Name"><input type="text" name="L4_6_dob" placeholder="DOB"><input type="text" name="L4_6_pob" placeholder="POB"><input type="text" name="L4_6_dom" placeholder="DOM"></div></div>
+                <div class="node-group"><div class="node eu-side"><span class="node-label">EU GGP</span><input type="text" name="L4_7_name" placeholder="Name"><input type="text" name="L4_7_dob" placeholder="DOB"><input type="text" name="L4_7_pob" placeholder="POB"><input type="text" name="L4_7_dom" placeholder="DOM"></div><div class="node"><span class="node-label">Spouse</span><input type="text" name="L4_8_name" placeholder="Name"><input type="text" name="L4_8_dob" placeholder="DOB"><input type="text" name="L4_8_pob" placeholder="POB"><input type="text" name="L4_8_dom" placeholder="DOM"></div></div>
+            </div>
         </div>
 
         <div class="submit-section">
-            <button type="button" class="action-btn" style="padding: 18px 70px;" onclick="sendTree()">Submit to Legal Team</button>
+            <button type="button" class="submit-btn" onclick="sendToLegal()">Submit to Legal Team</button>
         </div>
     </form>
 </div>
 
-<div id="guideModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h2>Family Tree Submission Guide</h2>
-        <div class="guide-text">
-            <h4>The Golden Rule: Follow the Lineage</h4>
-            <p>You do not need to fill out every frame on this chart. You only need to document the specific branch of your family through which you are claiming European citizenship.</p>
-            
-            <h4>How to Complete the Chart</h4>
-            <ul>
-                <li><strong>The Claim Side (EU SIDE):</strong> Identify the parent, grandparent, and great-grandparent who carry your direct bloodline to Europe. Enter their details in the frames labeled (EU SIDE).</li>
-                <li><strong>The Spousal Frames:</strong> In each generation, enter the spouse of your direct ancestor in the adjacent frame to complete the couple’s profile.</li>
-                <li><strong>Stop Where the Lineage Ends:</strong> If a certain branch of your family is not relevant to your citizenship claim, you may leave those frames entirely blank.</li>
-            </ul>
-
-            <h4>Required Information</h4>
-            <ul>
-                <li>Full Legal Name (Official records)</li>
-                <li>D.O.B & P.O.B (Date and Place of Birth)</li>
-                <li>Marriage Date (Official date)</li>
-            </ul>
-
-            <p style="background: #fff5f5; padding: 15px; border-left: 4px solid #f56565; margin-top: 20px;">
-                <strong>Expert Note:</strong> Accuracy is our priority. Ensure all names and dates match your certificates exactly. If any information is missing or unknown, please consult with us before submitting.
-            </p>
-            <div style="height: 100px;"></div>
-        </div>
-    </div>
-</div>
-
 <script>
-    function openModal() { document.getElementById("guideModal").style.display = "block"; }
-    function closeModal() { document.getElementById("guideModal").style.display = "none"; }
-    
-    function downloadTree() {
-        const treeElement = document.getElementById('tree-to-print');
-        html2canvas(treeElement, { backgroundColor: "#f8fafc", scale: 2 }).then(canvas => {
+    function downloadFullTree() {
+        const area = document.getElementById('capture-area');
+        
+        // דאס זאגט פארן קאמפיוטער צו כאפן דעם גאנצן שטח, נישט נאר די ווינדאוי
+        html2canvas(area, {
+            scrollX: 0,
+            scrollY: -window.scrollY,
+            windowWidth: area.scrollWidth,
+            windowHeight: area.scrollHeight,
+            scale: 2, // מאכט די בילד שארף
+            useCORS: true,
+            backgroundColor: "#f0f2f5"
+        }).then(canvas => {
             const link = document.createElement('a');
-            link.download = 'My-Family-Tree-Live.png';
-            link.href = canvas.toDataURL();
+            link.download = 'Complete-Family-Tree.png';
+            link.href = canvas.toDataURL("image/png");
             link.click();
         });
     }
 
-    function sendTree() {
-        const form = document.getElementById('family-tree-form');
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        const btn = document.querySelector('.submit-section button');
-        
-        btn.innerText = "SENDING...";
-        emailjs.send("service_tls7kck", "template_1hsm36j", data)
+    function sendToLegal() {
+        const btn = document.querySelector('.submit-btn');
+        btn.innerText = "Sending...";
+        emailjs.sendForm("service_tls7kck", "template_1hsm36j", "#family-tree-form")
             .then(() => {
-                alert("Family Tree sent successfully!");
-                btn.innerText = "SENT";
-                btn.style.background = "#28a745";
+                alert("Sent!");
+                btn.innerText = "Sent Successfully";
             }, (err) => {
-                alert("Error sending. Try again.");
+                alert("Error. Try again.");
                 btn.innerText = "Submit to Legal Team";
             });
     }
-
-    window.onclick = function(event) {
-        if (event.target == document.getElementById("guideModal")) { closeModal(); }
-    }
 </script>
-
 </body>
 </html>
