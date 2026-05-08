@@ -3,39 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Our Team | Approved Group</title>
+    <title>Contact the Founders | The Approved Foundation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; background: #050c1a; color: white; text-align: center; padding: 60px 20px; margin: 0; }
-        .contact-container { max-width: 700px; margin: 0 auto; background: white; color: #333; padding: 40px; border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        h2 { font-family: serif; color: #050c1a; font-size: 2rem; border-bottom: 2px solid #d4af37; padding-bottom: 10px; margin-bottom: 30px; }
-        .person-card { text-align: left; background: #f9f9f9; padding: 25px; border-radius: 15px; margin-bottom: 25px; border-left: 5px solid #d4af37; }
-        .person-card h3 { color: #d4af37; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; }
-        .contact-link { display: flex; align-items: center; gap: 15px; text-decoration: none; color: #050c1a; font-weight: 600; margin: 12px 0; transition: 0.2s; }
-        .contact-link:hover { color: #d4af37; }
-        .contact-link i { font-size: 1.2rem; color: #d4af37; width: 25px; text-align: center; }
-        .back-home { color: #d4af37; text-decoration: none; font-size: 0.9rem; display: inline-block; margin-top: 30px; }
+        :root { --navy: #050c1a; --gold: #d4af37; --white: #ffffff; --soft-bg: #f4f7f9; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--soft-bg); color: var(--navy); line-height: 1.8; }
+        
+        header { background: var(--navy); padding: 25px 0; text-align: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
+        .logo-small { width: 220px; }
+        .back-home { position: absolute; left: 30px; top: 35px; color: var(--gold); text-decoration: none; font-weight: 600; font-size: 0.85rem; border: 1px solid var(--gold); padding: 6px 16px; border-radius: 5px; transition: 0.3s; }
+        .back-home:hover { background: var(--gold); color: var(--navy); }
+
+        .hero-contact { 
+            background: var(--navy); color: var(--white); padding: 80px 20px; text-align: center;
+            background-image: linear-gradient(rgba(5, 12, 26, 0.9), rgba(5, 12, 26, 0.9)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1500');
+            background-size: cover; background-position: center;
+        }
+        .hero-contact h1 { font-family: 'Playfair Display'; font-size: 3.5rem; color: var(--gold); margin: 0; }
+
+        .container { max-width: 1100px; margin: -60px auto 100px; padding: 0 20px; }
+
+        .story-section { 
+            background: white; padding: 60px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); 
+            margin-bottom: 60px; border-top: 5px solid var(--gold);
+        }
+        .story-section h2 { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--navy); margin-bottom: 25px; text-align: center; }
+        .story-section p { font-size: 1.1rem; color: #444; margin-bottom: 20px; text-align: justify; }
+
+        .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .founder-card { 
+            background: var(--navy); color: white; border-radius: 20px; overflow: hidden; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3); transition: 0.4s; border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .founder-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+        
+        .founder-img { 
+            width: 100%; height: 350px; 
+            background-size: cover; background-position: center;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .founder-info { padding: 40px 30px; text-align: center; }
+        .founder-info h3 { font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--gold); margin-bottom: 5px; }
+        .founder-role { text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: #cbd5e0; display: block; margin-bottom: 30px; }
+        
+        .contact-details { display: flex; flex-direction: column; gap: 15px; }
+        
+        .action-link { 
+            background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 12px; 
+            text-decoration: none; color: white; transition: 0.3s; font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: center; gap: 12px; 
+            border: 1px solid rgba(255,255,255,0.1); font-weight: 600;
+        }
+        .action-link i { color: var(--gold); font-size: 1.1rem; }
+        .action-link:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+        .action-link:hover i { color: var(--navy); }
+
+        footer { text-align: center; padding: 60px; background: var(--navy); color: #666; border-top: 2px solid var(--gold); }
+
+        @media (max-width: 768px) { .founders-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="contact-container">
-        <h2>Direct Consultation</h2>
-        
-        <div class="person-card">
-            <h3>Moishe Weiss</h3>
-            <a href="tel:18454183135" class="contact-link"><i class="fas fa-phone-alt"></i> +1 (845) 418-3135</a>
-            <a href="https://wa.me/18454183135" target="_blank" class="contact-link"><i class="fab fa-whatsapp"></i> WhatsApp Moishe</a>
-            <a href="mailto:MOISHE@APPROVEDEU.COM" class="contact-link"><i class="fas fa-envelope"></i> MOISHE@APPROVEDEU.COM</a>
-        </div>
 
-        <div class="person-card">
-            <h3>Pinches Goldstein</h3>
-            <a href="tel:32470912705" class="contact-link"><i class="fas fa-phone-alt"></i> +32 470 91 27 05</a>
-            <a href="https://wa.me/32470912705" target="_blank" class="contact-link"><i class="fab fa-whatsapp"></i> WhatsApp Pinches</a>
-            <a href="mailto:PINCHES@APPROVEDEU.COM" class="contact-link"><i class="fas fa-envelope"></i> PINCHES@APPROVEDEU.COM</a>
-        </div>
+<header>
+    <a href="index.html" class="back-home">← BACK TO PORTAL</a>
+    <img src="logo.png" alt="The Approved Group" class="logo-small">
+</header>
 
-        <a href="index.html" class="back-home">← BACK TO HOMEPAGE</a>
+<section class="hero-contact">
+    <h1>Direct Leadership</h1>
+</section>
+
+<div class="container">
+    
+    <div class="story-section">
+        <h2>A Legacy of Advocacy</h2>
+        <p>The Approved Foundation was established on a singular premise: that the complex legal rights of the global Jewish community should never be left to chance. Founded by <b>Moishe Weiss</b> and <b>Boruch Goldstein</b>, our organization grew out of a profound understanding of the "void" that existed in European citizenship and residency services.</p>
+        <p>After years of navigating the intricate systems of the <b>European Union</b>—from archival research in Poland to residency litigation in the heart of Belgium—our founders decided to consolidate their expertise. We moved from individual consulting to a structured organization, built specifically to provide the "Grill" and the hard work required to break through administrative barriers.</p>
+        <p>Today, Moishe and Boruch remain personally involved in the strategic direction of every high-stakes case. Whether it is heritage citizenship for descendants of Holocaust survivors or long-term residency for young couples in Antwerp, our leadership ensures that justice is pursued with integrity and personal attention.</p>
     </div>
+
+    <div class="founders-grid">
+        
+        <div class="founder-card">
+            <div class="founder-img" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1000');"></div>
+            <div class="founder-info">
+                <h3>Moishe Weiss</h3>
+                <span class="founder-role">Co-Founder & Operations Lead</span>
+                
+                <div class="contact-details">
+                    <a href="tel:+32492617249" class="action-link">
+                        <i class="fas fa-phone-alt"></i> Call: +32 492 61 72 49
+                    </a>
+                    <a href="https://wa.me/18454183135" class="action-link" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Message on WhatsApp
+                    </a>
+                    <a href="mailto:mw6559154@gmail.com" class="action-link">
+                        <i class="fas fa-envelope"></i> Send Private Email
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="founder-card">
+            <div class="founder-img" style="background-image: url('https://images.unsplash.com/photo-1521791136366-39853752c0e7?auto=format&fit=crop&q=80&w=1000');"></div>
+            <div class="founder-info">
+                <h3>Boruch Goldstein</h3>
+                <span class="founder-role">Co-Founder & Legal Strategy</span>
+                
+                <div class="contact-details">
+                    <a href="tel:+32470912705" class="action-link">
+                        <i class="fas fa-phone-alt"></i> Call: +32 470 91 27 05
+                    </a>
+                    <a href="javascript:void(0);" class="action-link" style="cursor: default; opacity: 0.8;">
+                        <i class="fab fa-whatsapp"></i> Message on WhatsApp
+                    </a>
+                    <a href="mailto:burgold24@gmail.com" class="action-link">
+                        <i class="fas fa-envelope"></i> Send Private Email
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 THE APPROVED FOUNDATION | FOUNDERS DIRECTORY</p>
+</footer>
+
 </body>
 </html>
