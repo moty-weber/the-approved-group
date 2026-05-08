@@ -3,211 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Mission | The Approved Group Organization</title>
-    <meta name="description" content="The Approved Group is a global legal organization dedicated to helping the Jewish community reclaim EU citizenship, Belgian residency, and ancestral heritage rights.">
+    <title>The Approved Organization | Global Heritage & Restitution Database</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #050c1a; --gold: #d4af37; --dark-gold: #b8860b; --white: #ffffff; --text-gray: #cbd5e0; --soft-blue: #102a43; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: #02060f; color: var(--white); line-height: 1.8; overflow-x: hidden; }
+        :root { --navy: #050c1a; --gold: #d4af37; --dark-gold: #b8860b; --white: #ffffff; --text-gray: #cbd5e0; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: #02060f; color: var(--white); line-height: 1.9; overflow-x: hidden; }
         
-        header { background: var(--navy); padding: 25px 0; text-align: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-        .logo-small { width: 220px; }
-        .back-home { position: absolute; left: 30px; top: 35px; color: var(--gold); text-decoration: none; font-weight: 600; font-size: 0.85rem; border: 1px solid var(--gold); padding: 6px 16px; border-radius: 5px; transition: 0.3s; text-transform: uppercase; }
+        /* DYNAMIC DISAPPEARING HEADER */
+        header { 
+            background: var(--navy); padding: 40px 0; text-align: center; 
+            border-bottom: 2px solid var(--gold); position: fixed; 
+            width: 100%; top: 0; z-index: 2000; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        header.scrolled { padding: 15px 0; background: rgba(5, 12, 26, 0.99); backdrop-filter: blur(25px); border-bottom: 1px solid var(--gold); }
+        
+        .logo-img { width: 300px; transition: 0.6s; }
+        header.scrolled .logo-img { width: 160px; }
+
+        .header-slogan { 
+            color: var(--dark-gold); font-size: 1rem; font-weight: 600; 
+            letter-spacing: 7px; text-transform: uppercase; margin-top: 15px; 
+            transition: 0.5s; opacity: 1;
+        }
+        header.scrolled .header-slogan { opacity: 0; font-size: 0; margin: 0; transform: translateY(-30px); }
+
+        .back-home { 
+            position: absolute; left: 40px; top: 55px; color: var(--gold); 
+            text-decoration: none; font-weight: 600; font-size: 0.9rem; 
+            border: 1px solid var(--gold); padding: 12px 28px; border-radius: 5px; 
+            transition: 0.3s; z-index: 2100; text-transform: uppercase;
+        }
+        header.scrolled .back-home { top: 20px; padding: 7px 18px; font-size: 0.8rem; }
         .back-home:hover { background: var(--gold); color: var(--navy); }
 
-        /* Hero */
-        .hero-about { 
-            height: 75vh; background: linear-gradient(rgba(5, 12, 26, 0.8), rgba(5, 12, 26, 0.8)), url('https://images.unsplash.com/photo-1521791136366-39853752c0e7?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px;
+        /* MEGA HERO */
+        .hero-mega { 
+            height: 95vh; background: linear-gradient(rgba(5, 12, 26, 0.85), rgba(5, 12, 26, 0.85)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px; margin-top: 180px;
         }
-        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--gold); margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .hero-content p { font-size: 1.5rem; color: var(--text-gray); font-weight: 300; max-width: 900px; margin: 0 auto; }
+        .hero-mega h1 { font-family: 'Playfair Display', serif; font-size: 7rem; color: var(--gold); margin-bottom: 20px; line-height: 1; }
+        .hero-mega p { font-size: 2rem; color: var(--text-gray); max-width: 1100px; margin: 0 auto; font-weight: 300; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 150px 20px; }
 
-        /* Philosophy Section */
-        .org-philosophy { text-align: center; margin-bottom: 120px; }
-        .org-philosophy h2 { font-family: 'Playfair Display'; font-size: 3.5rem; color: var(--gold); margin-bottom: 40px; }
-        .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
-        .phil-box { background: var(--glass); border: 1px solid rgba(212, 175, 55, 0.2); padding: 40px; border-radius: 20px; transition: 0.4s; }
-        .phil-box:hover { background: rgba(212, 175, 55, 0.05); border-color: var(--gold); }
-        .phil-box i { font-size: 3rem; color: var(--gold); margin-bottom: 20px; }
+        /* DATA CHAPTERS */
+        .chapter { margin-bottom: 250px; }
+        .chapter-header { margin-bottom: 60px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 20px; }
+        .chapter-header h2 { font-family: 'Playfair Display'; font-size: 4.5rem; color: var(--gold); margin: 0; }
+        .chapter-header span { color: var(--dark-gold); text-transform: uppercase; letter-spacing: 5px; font-size: 1.1rem; }
 
-        /* Deep Content Sections */
-        .content-section { margin-bottom: 150px; display: flex; align-items: center; gap: 80px; flex-wrap: wrap; }
-        .content-section.reverse { flex-direction: row-reverse; }
-        .text-block { flex: 1; min-width: 400px; }
-        .img-block { flex: 1; min-width: 400px; }
-        .img-block img { width: 100%; border-radius: 20px; border: 1px solid var(--gold); box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+        .content-grid.reverse { direction: rtl; }
+        .content-grid.reverse .text-area { direction: ltr; }
 
-        h2.section-h { font-family: 'Playfair Display'; font-size: 3rem; color: var(--gold); margin-bottom: 30px; }
-        .text-block p { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 25px; text-align: justify; }
+        .text-area p { font-size: 1.3rem; color: var(--text-gray); margin-bottom: 35px; text-align: justify; }
+        .text-area b { color: var(--gold); }
 
-        /* SEO Keywords Badge */
-        .seo-tags { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 10px; }
-        .tag { background: rgba(212, 175, 55, 0.1); color: var(--gold); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .media-area img { width: 100%; border-radius: 8px; border: 1px solid var(--gold); box-shadow: 0 50px 100px rgba(0,0,0,0.8); }
 
-        /* Expanded Interactive Accordions */
-        .accordion-section { margin-top: 100px; }
-        .acc-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; margin-bottom: 30px; }
-        .acc-header { padding: 35px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .acc-header h3 { margin: 0; font-family: 'Playfair Display'; font-size: 1.8rem; color: var(--gold); }
-        .acc-content { display: none; padding: 0 40px 40px; }
-        .acc-card.active .acc-content { display: block; }
-        .acc-card.active { border-color: var(--gold); background: rgba(212, 175, 55, 0.03); }
+        .highlight-card { 
+            background: linear-gradient(145deg, #0a192f, #050c1a); 
+            padding: 50px; border-radius: 15px; border-left: 10px solid var(--gold); 
+            margin: 60px 0; font-size: 1.5rem; line-height: 1.7; font-style: italic;
+        }
 
-        .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .media-grid img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        /* NEW SPECFIC SECTIONS */
+        .info-strip { background: var(--navy); padding: 100px 0; margin: 150px 0; border-y: 1px solid var(--gold); }
+        .strip-container { max-width: 1200px; margin: 0 auto; text-align: center; }
 
-        .btn-large { display: inline-block; background: var(--gold); color: var(--navy); padding: 22px 60px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 1.3rem; margin-top: 50px; transition: 0.4s; text-transform: uppercase; }
-        .btn-large:hover { background: var(--white); transform: scale(1.05); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
+        /* THE ACCORDION ARCHIVE */
+        .archive-box { margin-top: 150px; }
+        .archive-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px; }
+        .archive-trigger { padding: 45px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .archive-trigger:hover { background: rgba(212, 175, 55, 0.05); }
+        .archive-trigger h3 { margin: 0; font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--gold); }
+        .archive-body { display: none; padding: 0 45px 70px; background: rgba(0,0,0,0.4); }
+        .archive-item.active .archive-body { display: block; }
 
-        footer { background: var(--navy); padding: 100px 20px; text-align: center; border-top: 3px solid var(--gold); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 50px; }
+        .gallery-grid img { width: 100%; height: 300px; object-fit: cover; border: 1px solid var(--gold); }
+
+        .btn-mission { 
+            display: inline-block; background: var(--gold); color: var(--navy); 
+            padding: 30px 120px; border-radius: 5px; text-decoration: none; 
+            font-weight: 900; font-size: 2rem; text-transform: uppercase; transition: 0.4s;
+        }
+
+        footer { background: var(--navy); padding: 150px 20px; text-align: center; border-top: 5px solid var(--gold); }
+
+        @media (max-width: 1100px) {
+            .content-grid { grid-template-columns: 1fr; gap: 50px; }
+            .hero-mega h1 { font-size: 4rem; }
+            .chapter-header h2 { font-size: 3rem; }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <a href="index.html" class="back-home">← BACK TO PORTAL</a>
-    <img src="logo.png" alt="The Approved Group" class="logo-small">
+<header id="main-header">
+    <a href="index.html" class="back-home">← MAIN PORTAL</a>
+    <img src="logo.png" alt="The Approved Group" class="logo-img">
+    <div class="header-slogan">Sovereign Restitution & Heritage Organization</div>
 </header>
 
-<section class="hero-about">
+<section class="hero-mega">
     <div class="hero-content">
-        <h1>More Than a Business.</h1>
-        <p>A Dedicated Organization Standing at the Frontlines of Jewish Ancestry, Legal Restoration, and Global Mobility.</p>
+        <h1>Foundation Archive</h1>
+        <p>The definitive database of legal advocacy, historical justice, and our organization's commitment to the global Jewish community.</p>
     </div>
 </section>
 
 <div class="container">
-
-    <section class="org-philosophy">
-        <h2>A Mission-Driven Organization</h2>
-        <p style="max-width: 900px; margin: 0 auto; font-size: 1.3rem; color: var(--text-gray);">We operate as a legal advocacy organization. Our primary focus is not profit, but the successful restitution of identity and rights for every Jewish family we represent.</p>
-        
-        <div class="philosophy-grid">
-            <div class="phil-box">
-                <i class="fas fa-hand-holding-heart"></i>
-                <h3>Unwavering Advocacy</h3>
-                <p>We don't just process papers; we advocate for your case. We treat every applicant as a member of our extended family, fighting bureaucracy at every turn.</p>
+    
+    <section class="chapter">
+        <div class="chapter-header">
+            <span>Volume I</span>
+            <h2>Institutional Advocacy</h2>
+        </div>
+        <div class="content-grid">
+            <div class="text-area">
+                <p>The Approved Group was established as more than a service provider; it was founded as an <b>Organization of Legal Restitution</b>. For too long, our community operated within a vacuum, where individual families were left to struggle against the formidable bureaucracy of European courts and municipal archives. We stepped in to bridge that void, transforming ancestral history into functional legal rights.</p>
+                <p>Our operation is rooted in the belief that historical justice is a continuous process. While we navigate the technicalities of <b>Jus Sanguinis</b> and modern restitution statutes, our ultimate focus remains on the person behind the file. We advocate for the student in Antwerp, the business leader in London, and the family in Monsey—all seeking to reclaim what was once stolen by time and displacement.</p>
             </div>
-            <div class="phil-box">
-                <i class="fas fa-atlas"></i>
-                <h3>Historical Restitution</h3>
-                <p>Restoring the bridge to Europe that was broken by the events of the 20th century. We turn historical records into modern-day freedom.</p>
-            </div>
-            <div class="phil-box">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Trusted Integrity</h3>
-                <p>In a world of complex laws, we provide a shield of integrity. Transparency is our baseline, and your success is our only metric.</p>
+            <div class="media-area">
+                <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&q=80&w=1000" alt="Legal Library">
             </div>
         </div>
     </section>
 
-    <div class="content-section">
-        <div class="text-block">
-            <h2 class="section-h">The Vacuum in the Charedi World</h2>
-            <p>For decades, the global Orthodox community—from the streets of Brooklyn and Monsey to the heart of London and Antwerp—faced a staggering wall of silence when it came to their European legal rights. Families who had lived in Poland, Germany, and Austria for centuries found themselves unable to reclaim their status.</p>
-            <p>We identified a massive vacuum: a lack of representation that understood the specific needs of the <i>Heimishe</i> community. Whether it's the requirement for valid documentation to visit the resting places of the <b>Chassidic Masters in Kerestir, Lizhensk, or Pshevorsk</b>, or the need for young couples to settle in the diamond district of Antwerp, the need was clear.</p>
-            <p>The Approved Group was founded to bridge this gap, ensuring that every <i>Yid</i> can navigate the <b>European Union's</b> complex legal landscape with confidence and dignity.</p>
-            <div class="seo-tags">
-                <span class="tag">Charedi Heritage</span><span class="tag">EU Passport Agency</span><span class="tag">Jewish Genealogy</span><span class="tag">European Residency</span>
-            </div>
+    <section class="chapter">
+        <div class="chapter-header">
+            <span>Volume II</span>
+            <h2>The Border & The Birthright</h2>
         </div>
-        <div class="img-block">
-            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=1000" alt="European Archives">
-        </div>
-    </div>
-
-    <div class="content-section reverse">
-        <div class="text-block">
-            <h2 class="section-h">Restitution is a Battle, Not a Process</h2>
-            <p>While some claim that getting an EU passport is a mere administrative formality, the reality is far more intense. It is a legal battle. Nations have created paths for restitution, but the actual implementation is buried under layers of ancient statutes and modern restrictions.</p>
-            <p><b>We sweat over every case.</b> We don't just "apply"—we build a comprehensive legal dossier. We work with specialized historians to track names changed during the Holocaust, ensuring that <b>Article 116 of the German Constitution</b> or <b>Polish Citizenship by Descent</b> laws are applied correctly.</p>
-            <p>Our organization specializes in high-difficulty cases, including <b>Belgium Type D Visas</b>, student residency permits, and family reunification for young married couples. We take the "grill" and the hard work upon ourselves so our clients don't have to.</p>
-            <div class="seo-tags">
-                <span class="tag">Holocaust Restitution</span><span class="tag">Belgian Nationality Law</span><span class="tag">German Article 116</span><span class="tag">Asylum Rights EU</span>
-            </div>
-        </div>
-        <div class="img-block">
-            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1000" alt="Legal Documentation Hard Work">
-        </div>
-    </div>
-
-    <div class="accordion-section">
-        <h2 class="section-h" style="text-align: center;">Deep-Dive Legal Portfolios</h2>
-
-        <div class="acc-card">
-            <div class="acc-header">
-                <h3>Ancestry & Citizenship by Descent (EU-Wide)</h3>
-                <i class="fas fa-plus"></i>
-            </div>
-            <div class="acc-content">
-                <p>The European Union allows for the reclamation of citizenship for those whose ancestors were unlawfully deprived of it. We specialize in the complex nuances of Polish, Austrian, German, and Hungarian laws. This process requires meticulously verified birth and marriage certificates dating back to the 19th century.</p>
-                <div class="media-grid">
-                    <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&q=80&w=600" alt="Archives">
-                    <img src="https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?auto=format&fit=crop&q=80&w=600" alt="Old Documents">
+        <div class="content-grid reverse">
+            <div class="text-area">
+                <p>A disturbing reality exists today: thousands of <b>American Jews</b>, despite possessing deep-rooted European heritage, find themselves waiting for hours in exhausting border queues when entering the EU. They stand as "foreigners" on the very soil where their grandfathers were recognized citizens.</p>
+                <p>This is a legal paradox. Under current EU restitution laws, many of these individuals possess the inherent <b>Right of Return</b>. They are entitled to European passports by heritage, yet they remain unaware or intimidated by the process. Our organization works tirelessly to correct this. We help American families reclaim their status, allowing them to enter Europe with the dignity of a citizen, skipping the lines and securing their permanent right to the continent.</p>
+                <div class="highlight-card">
+                    "Why wait in line as a stranger when you are legally a son of the soil? Your ancestry is not just a story—it is a legal key to the European Union."
                 </div>
-                <a href="https://europa.eu/european-union/about-eu/history_en" target="_blank" class="legal-link" style="color:var(--gold);">Historical Context of EU Law →</a>
+            </div>
+            <div class="media-area">
+                <img src="https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?auto=format&fit=crop&q=80&w=1000" alt="The Border Rights">
             </div>
         </div>
+    </section>
 
-        <div class="acc-card">
-            <div class="acc-header">
-                <h3>Residency, Visas & Student Rights in Belgium</h3>
-                <i class="fas fa-plus"></i>
+    <section class="chapter">
+        <div class="chapter-header">
+            <span>Volume III</span>
+            <h2>Ending the 90-Day Exile</h2>
+        </div>
+        <div class="content-grid">
+            <div class="text-area">
+                <p>In the heart of Antwerp and across Belgium, many young married couples from across the globe find themselves trapped in a cycle of instability. Without proper status, they are forced to leave the country every three months to "reset" their 90-day visa, disrupting their lives, their studies, and their families.</p>
+                <p>Our organization has made it a priority to end this cycle of "exile." Through expert application of <b>Family Reunification</b> laws and ancestry restitution, we help these couples secure their permanent residency and European passports. No longer do they have to live in fear of the calendar; we provide the legal stability needed to build a home in Belgium with full rights and security.</p>
             </div>
-            <div class="acc-content">
-                <p>Antwerp is a second home to the Jewish people. Navigating the <b>Office des Étrangers</b> requires local expertise. We facilitate long-term <b>Type D Visas</b>, Student residency for those in Rabbinical studies, and Asylum-based protections when applicable.</p>
-                <div class="media-grid">
-                    <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=600" alt="Antwerp Building">
-                    <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&q=80&w=600" alt="European Court">
-                </div>
-                <a href="https://dofi.ibz.be/en" target="_blank" class="legal-link" style="color:var(--gold);">Official Belgian Immigration Portal →</a>
+            <div class="media-area">
+                <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1000" alt="Antwerp Heritage">
             </div>
         </div>
+    </section>
 
-        <div class="acc-card">
-            <div class="acc-header">
-                <h3>Legal Research & Genealogical Verification</h3>
-                <i class="fas fa-plus"></i>
+    <section class="chapter">
+        <div class="chapter-header">
+            <span>Volume IV</span>
+            <h2>The Labor of Justice</h2>
+        </div>
+        <div class="content-grid reverse">
+            <div class="text-area">
+                <p>We do not operate like a typical business. We are an organization that "sweats" for the community. Every file is a battle against bureaucratic inertia. We provide what we call <b>"The Grill"</b>—the intense, meticulous research required to find birth records from 1890, military papers from 1920, and marriage acts from pre-war municipalities.</p>
+                <p>While a business might seek the easiest path, we seek the most just one. We engage with historians and genealogical experts to verify family trees that were shattered by the Holocaust. Every minute we spend in an archive in Poland or Germany is a minute dedicated to the restoration of a family's rightful status.</p>
             </div>
-            <div class="acc-content">
-                <p>Most cases fail because of "Broken Links" in the family tree. Our organization employs research specialists to fill these gaps. We work with international archives to verify family lineage, providing the court-ready evidence needed for success.</p>
-                <div class="media-grid">
-                    <img src="https://images.unsplash.com/photo-1585644131574-0671607f2307?auto=format&fit=crop&q=80&w=600" alt="Old Maps">
-                    <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=600" alt="Legal Books">
+            <div class="media-area">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1000" alt="Legal Gavel">
+            </div>
+        </div>
+    </section>
+
+    <section class="archive-box">
+        <h2 class="chapter-header" style="text-align: center; border: none;"><span>Interactive Database</span><br>Technical Legal Portfolios</h2>
+        
+        <div class="archive-item">
+            <div class="archive-trigger"><h3>Restitution Laws (Germany, Poland, Austria)</h3><i class="fas fa-chevron-down"></i></div>
+            <div class="archive-body">
+                <p>Comprehensive analysis of Article 116 (2) of the Basic Law (Germany) and Section 58c of the Austrian Nationality Act. We specialize in proving "persecution-based displacement" to bypass residency requirements for descendants.</p>
+                <div class="gallery-grid">
+                    <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=600" alt="Records">
+                    <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&q=80&w=600" alt="Court">
+                    <img src="https://images.unsplash.com/photo-1541944743827-e04bb645f946?auto=format&fit=crop&q=80&w=600" alt="Mapping">
                 </div>
             </div>
         </div>
-    </div>
 
-    <div style="text-align: center; margin-top: 100px;">
-        <h2 style="font-family: 'Playfair Display'; color: var(--white); font-size: 3rem;">Ready to Begin the Mission?</h2>
-        <p style="color: var(--text-gray);">Our legal experts are standing by to review your family lineage.</p>
-        <a href="index.html" class="btn-large">Open New Inquiry</a>
+        <div class="archive-item">
+            <div class="archive-trigger"><h3>Belgian National Residency (Type D)</h3><i class="fas fa-chevron-down"></i></div>
+            <div class="archive-body">
+                <p>Protocols for long-term residency, family reunification, and student rights in Antwerp. We facilitate the entire process from Annex 3bis sponsorship to final residency issuance through the Office des Étrangers.</p>
+                <div class="gallery-grid">
+                    <img src="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&q=80&w=600" alt="Belgium">
+                    <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=600" alt="Strategy">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=600" alt="Work">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="text-align: center; margin-top: 150px;">
+        <h2 style="font-family: 'Playfair Display'; color: var(--gold); font-size: 4rem;">Secure Your Legacy</h2>
+        <br><br>
+        <a href="index.html" class="btn-mission">Start Your Mission</a>
     </div>
 
 </div>
 
 <footer>
-    <img src="logo.png" alt="The Approved Group" style="width: 200px; margin-bottom: 30px; opacity: 0.8;">
-    <p style="max-width: 600px; margin: 0 auto; color: #666;">The Approved Group is a global legal restitution organization dedicated to Jewish heritage and EU rights. We are an independent body of legal consultants and researchers.</p>
-    <div style="margin-top: 30px; font-size: 0.8rem; color: #444;">
-        &copy; 2026 THE APPROVED GROUP ORGANIZATION | ALL RIGHTS RESERVED.
-    </div>
+    <img src="logo.png" alt="The Approved Group" style="width: 280px; opacity: 0.8; margin-bottom: 50px;"><br>
+    <p style="max-width: 900px; margin: 0 auto; color: #666; font-size: 1rem;">The Approved Group Organization is a global legal body dedicated to the restitution of Jewish heritage and EU citizenship rights. We stand as a shield for the Diaspora, ensuring justice is restored for every family.</p>
+    <div style="margin-top: 60px; font-size: 0.9rem; color: #444;">&copy; 2026 THE APPROVED GROUP ORGANIZATION | ALL RIGHTS RESERVED</div>
 </footer>
 
 <script>
-    // Accordion Logic
-    document.querySelectorAll('.acc-header').forEach(header => {
-        header.addEventListener('click', () => {
-            const card = header.parentElement;
-            card.classList.toggle('active');
-            const icon = header.querySelector('i');
-            icon.classList.toggle('fa-plus');
-            icon.classList.toggle('fa-minus');
+    // HEADER SCROLL ANIMATION
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('main-header');
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+    });
+
+    // ACCORDION LOGIC
+    document.querySelectorAll('.archive-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const item = trigger.parentElement;
+            item.classList.toggle('active');
         });
     });
 </script>
