@@ -48,7 +48,7 @@
         .container { max-width: 1400px; margin: 0 auto; padding: 150px 20px; }
 
         /* DATA CHAPTERS */
-        .chapter { margin-bottom: 200px; }
+        .chapter { margin-bottom: 120px; }
         .chapter-header { margin-bottom: 40px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; }
         .chapter-header h2 { font-family: 'Playfair Display'; font-size: 3.5rem; color: var(--gold); margin: 0; }
         .chapter-header span { color: var(--dark-gold); text-transform: uppercase; letter-spacing: 5px; font-size: 1rem; }
@@ -58,7 +58,7 @@
         .text-area p { font-size: 1.3rem; color: var(--text-gray); margin-bottom: 35px; text-align: justify; }
         .text-area b { color: var(--gold); }
 
-        .media-area img { width: 100%; border-radius: 8px; border: 1px solid var(--gold); box-shadow: 0 50px 100px rgba(0,0,0,0.8); }
+        .media-area img { width: 100%; border-radius: 8px; border: 1px solid var(--gold); box-shadow: 0 50px 100px rgba(0,0,0,0.8); margin-bottom: 30px; }
 
         .highlight-card { 
             background: linear-gradient(145deg, #0a192f, #050c1a); 
@@ -70,8 +70,7 @@
         .archive-box { margin-top: 150px; }
         .archive-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; transition: 0.3s; }
         .archive-trigger { padding: 40px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .archive-trigger:hover { background: rgba(212, 175, 55, 0.1); }
-        .archive-trigger h3 { margin: 0; font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--gold); }
+        .archive-trigger h3 { margin: 0; font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--gold); }
         .archive-trigger i { color: var(--gold); font-size: 1.5rem; transition: 0.3s; }
         .archive-body { display: none; padding: 0 45px 70px; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(212, 175, 55, 0.1); }
         .archive-item.active .archive-body { display: block; }
@@ -80,7 +79,6 @@
         .faq-q { color: var(--gold); font-weight: 700; font-size: 1.4rem; margin-top: 30px; display: block; }
         .faq-a { color: var(--text-gray); font-size: 1.2rem; margin-bottom: 20px; display: block; }
 
-        /* NEW CALL TO ACTION LINK */
         .contact-cta-link { 
             display: inline-block; margin-top: 40px; padding: 15px 30px; 
             border: 1px dashed var(--gold); color: var(--gold); text-decoration: none; 
@@ -101,7 +99,6 @@
 
         @media (max-width: 1100px) {
             .content-grid { grid-template-columns: 1fr !important; gap: 50px; }
-            .hero-mega h1 { font-size: 4rem; }
         }
     </style>
 </head>
@@ -116,7 +113,7 @@
 <section class="hero-mega">
     <div class="hero-content">
         <h1>Foundation Archive</h1>
-        <p>A multi-layered repository of legal restitution, historical justice, and sovereign advocacy for the global Jewish community.</p>
+        <p>A definitive database of legal restitution, historical justice, and our organization's commitment to the global Jewish community.</p>
     </div>
 </section>
 
@@ -125,15 +122,12 @@
     <section class="chapter">
         <div class="content-grid">
             <div class="text-area">
-                <div class="chapter-header">
-                    <span>Volume I</span>
-                    <h2>Institutional Advocacy</h2>
-                </div>
+                <div class="chapter-header"><span>Volume I</span><h2>Institutional Advocacy</h2></div>
                 <p>The Approved Group was established as more than a service provider; it was founded as an <b>Organization of Legal Restitution</b>. For too long, our community operated within a vacuum, where individual families were left to struggle against the formidable bureaucracy of European courts and municipal archives. We stepped in to bridge that void, transforming ancestral history into functional legal rights.</p>
                 <p>Our operation is rooted in the belief that historical justice is a continuous process. While we navigate the technicalities of <b>Jus Sanguinis</b> and modern restitution statutes, our ultimate focus remains on the person behind the file. We advocate for the student in Antwerp, the business leader in London, and the family in Monsey—all seeking to reclaim what was once stolen by time and displacement.</p>
             </div>
             <div class="media-area">
-                <img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=1000" alt="Classical Library Architecture">
+                <img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=1000" alt="Classical Library">
             </div>
         </div>
     </section>
@@ -141,18 +135,14 @@
     <section class="chapter">
         <div class="content-grid">
             <div class="media-area">
-                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1000" alt="European Legal Statue">
+                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1000" alt="Legal Statue">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1000" alt="Legal Documentation">
             </div>
             <div class="text-area">
-                <div class="chapter-header">
-                    <span>Volume II</span>
-                    <h2>The Border & The Birthright</h2>
-                </div>
-                <p>A disturbing reality exists today: thousands of <b>American Jews</b>, despite possessing deep-rooted European heritage, find themselves waiting for hours in exhausting border queues when entering the EU. They stand as "foreigners" on the very soil where their grandfathers were recognized citizens.</p>
+                <div class="chapter-header"><span>Volume II</span><h2>The Border & The Birthright</h2></div>
+                <p>A disturbing reality exists today: thousands of <b>American Jews</b> find themselves waiting for hours in exhausting border queues when entering the EU. They stand as "foreigners" on the very soil where their grandfathers were recognized citizens.</p>
                 <p>This is a legal paradox. Under current EU restitution laws, many of these individuals possess the inherent <b>Right of Return</b>. They are entitled to European passports by heritage, yet they remain unaware or intimidated by the process. Our organization works tirelessly to correct this. We help American families reclaim their status, allowing them to enter Europe with the dignity of a citizen, skipping the lines and securing their permanent right to the continent.</p>
-                <div class="highlight-card">
-                    "Why wait in line as a stranger when you are legally a son of the soil? Your ancestry is not just a story—it is a legal key to the European Union."
-                </div>
+                <div class="highlight-card">"Why wait in line as a stranger when you are legally a son of the soil? Your ancestry is not just a story—it is a legal key to the European Union."</div>
             </div>
         </div>
     </section>
@@ -160,15 +150,12 @@
     <section class="chapter">
         <div class="content-grid">
             <div class="text-area">
-                <div class="chapter-header">
-                    <span>Volume III</span>
-                    <h2>Ending the 90-Day Exile</h2>
-                </div>
+                <div class="chapter-header"><span>Volume III</span><h2>Ending the 90-Day Exile</h2></div>
                 <p>In the heart of Antwerp and across Belgium, many young married couples from across the globe find themselves trapped in a cycle of instability. Without proper status, they are forced to leave the country every three months to "reset" their 90-day visa, disrupting their lives, their studies, and their families.</p>
                 <p>Our organization has made it a priority to end this cycle of "exile." Through expert application of <b>Family Reunification</b> laws and ancestry restitution, we help these couples secure their permanent residency and European passports. No longer do they have to live in fear of the calendar; we provide the legal stability needed to build a home in Belgium with full rights and security.</p>
             </div>
             <div class="media-area">
-                <img src="https://images.unsplash.com/photo-1540962351504-03099e0a75c3?auto=format&fit=crop&q=80&w=1000" alt="Antwerp Old Town Square">
+                <img src="https://images.unsplash.com/photo-1541944743827-e04bb645f946?auto=format&fit=crop&q=80&w=1000" alt="European Town Square">
             </div>
         </div>
     </section>
@@ -176,14 +163,11 @@
     <section class="chapter">
         <div class="content-grid">
             <div class="media-area">
-                <img src="https://images.unsplash.com/photo-1453941403708-3415117ee750?auto=format&fit=crop&q=80&w=1000" alt="Writing Legal Documents">
+                <img src="https://images.unsplash.com/photo-1589330664650-80c13b80350c?auto=format&fit=crop&q=80&w=1000" alt="Legal Gavel">
             </div>
             <div class="text-area">
-                <div class="chapter-header">
-                    <span>Volume IV</span>
-                    <h2>The Labor of Justice</h2>
-                </div>
-                <p>We do not operate like a typical business. We are an organization that "sweats" for the community. Every file is a battle against bureaucratic inertia. We provide what we call <b>"The Grill"</b>—the intense, meticulous research required to find birth records from 1890, military papers from 1920, and marriage acts from pre-war municipalities.</p>
+                <div class="chapter-header"><span>Volume IV</span><h2>The Labor of Justice</h2></div>
+                <p>We do not operate like a typical business. We are an organization that "sweats" for the community. Every file is a battle against bureaucratic inertia. We provide מה שמען רופט <b>"The Grill"</b>—the intense, meticulous research required to find birth records from 1890, military papers from 1920, and marriage acts from pre-war municipalities.</p>
                 <p>While a business might seek the easiest path, we seek the most just one. We engage with historians and genealogical experts to verify family trees that were shattered by the Holocaust. Every minute we spend in an archive in Poland or Germany is a minute dedicated to the restoration of a family's rightful status.</p>
             </div>
         </div>
@@ -196,43 +180,36 @@
             <div class="archive-trigger"><h3>Restitution & Ancestry FAQ</h3><i class="fas fa-chevron-down"></i></div>
             <div class="archive-body">
                 <span class="faq-q">Q: What if I don't have my grandfather's birth certificate?</span>
-                <span class="faq-a">A: This is where our organization excels. We utilize a network of researchers to access closed municipal and military archives in Europe. In many cases, we can retrieve a legal equivalent that satisfies the requirements for citizenship.</span>
+                <span class="faq-a">A: This is where our organization excels. We utilize a network of researchers to access closed municipal and military archives in Europe. In many cases, we can retrieve a legal equivalent.</span>
 
                 <span class="faq-q">Q: Does an American citizen lose their US passport by obtaining an EU one?</span>
-                <span class="faq-a">A: Absolutely not. The United States and most EU nations fully recognize dual citizenship. You retain all your American rights while gaining the sovereign protections of Europe.</span>
+                <span class="faq-a">A: Absolutely not. The United States and most EU nations fully recognize dual citizenship. You retain all your American rights.</span>
 
                 <span class="faq-q">Q: How many generations back can we go?</span>
-                <span class="faq-a">A: This depends on the specific country (Poland, Germany, Austria, etc.). Generally, if your ancestor was a citizen and lived there after 1918-1920, or was persecuted between 1933-1945, there is a strong legal basis for your claim.</span>
-                
-                <a href="contact.html" class="contact-cta-link">
-                    For further questions, please contact our founders for direct clarification →
-                </a>
+                <span class="faq-a">A: Generally, if your ancestor was a citizen after 1918 or persecuted between 1933-1945, there is a strong legal basis.</span>
+                <a href="contact.html" class="contact-cta-link">For further questions, contact our founders for direct clarification →</a>
             </div>
         </div>
 
         <div class="archive-item">
-            <div class="archive-trigger"><h3>Belgian Residency & Antwerp Life FAQ</h3><i class="fas fa-chevron-down"></i></div>
+            <div class="archive-trigger"><h3>Belgian Residency FAQ</h3><i class="fas fa-chevron-down"></i></div>
             <div class="archive-body">
                 <span class="faq-q">Q: Why are young couples forced to leave Belgium every 3 months?</span>
-                <span class="faq-a">A: Most enter on a 90-day Schengen tourist visa. Without an official Type D Visa or a Residency Permit, their stay is temporary. Our goal is to convert this status into permanent residency through ancestry or family reunification laws.</span>
+                <span class="faq-a">A: They enter on 90-day tourist visas. Without official status, their stay is temporary. We convert this into permanent residency through ancestry or family reunification laws.</span>
 
-                <span class="faq-q">Q: What is the "Annex 3bis" and why is it so difficult?</span>
-                <span class="faq-a">A: This is a formal sponsorship document. It requires meticulous proof of income and housing. Our organization provides the legal "Grill" to ensure this document is accepted by the Office des Étrangers without delay.</span>
-                
-                <a href="contact.html" class="contact-cta-link">
-                    For further questions, please contact our founders for direct clarification →
-                </a>
+                <span class="faq-q">Q: What is the "Annex 3bis"?</span>
+                <span class="faq-a">A: A complex sponsorship document. Our organization provides the legal "Grill" to ensure this is accepted without delay.</span>
+                <a href="contact.html" class="contact-cta-link">For further questions, contact our founders for direct clarification →</a>
             </div>
         </div>
 
         <div class="archive-item">
             <div class="archive-trigger"><h3>Interactive Legal Strategy Portfolio</h3><i class="fas fa-chevron-down"></i></div>
             <div class="archive-body">
-                <p>Below is a visual archive of our strategic focus areas, from archival mapping to high-level legal research.</p>
                 <div class="gallery-grid">
-                    <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=600" alt="Library Bookshelf">
-                    <img src="https://images.unsplash.com/photo-1589330664650-80c13b80350c?auto=format&fit=crop&q=80&w=600" alt="European Court Seal">
-                    <img src="https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?auto=format&fit=crop&q=80&w=600" alt="Antique Map Detail">
+                    <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=600" alt="Library">
+                    <img src="https://images.unsplash.com/photo-1589330664650-80c13b80350c?auto=format&fit=crop&q=80&w=600" alt="Court Seal">
+                    <img src="https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?auto=format&fit=crop&q=80&w=600" alt="Map Detail">
                 </div>
             </div>
         </div>
@@ -240,27 +217,23 @@
 
     <div style="text-align: center; margin-top: 150px;">
         <h2 style="font-family: 'Playfair Display'; color: var(--gold); font-size: 4rem;">Secure Your Legacy</h2>
-        <br><br>
         <a href="index.html" class="btn-mission">Start Your Mission</a>
     </div>
-
 </div>
 
 <footer>
     <img src="logo.png" alt="The Approved Group" style="width: 280px; opacity: 0.8; margin-bottom: 50px;"><br>
-    <p style="max-width: 900px; margin: 0 auto; color: #666; font-size: 1rem;">The Approved Group Organization is a global legal body dedicated to the restitution of Jewish heritage and EU citizenship rights. We stand as a shield for the Diaspora, ensuring justice is restored for every family.</p>
-    <div style="margin-top: 60px; font-size: 0.9rem; color: #444;">&copy; 2026 THE APPROVED GROUP ORGANIZATION | GLOBAL LEGAL RECOVERY</div>
+    <p style="max-width: 900px; margin: 0 auto; color: #666; font-size: 1rem;">The Approved Group Organization is a global legal body dedicated to the restitution of Jewish heritage and EU citizenship rights. We stand as a shield for the Diaspora.</p>
+    <div style="margin-top: 60px; font-size: 0.9rem; color: #444;">&copy; 2026 THE APPROVED GROUP ORGANIZATION</div>
 </footer>
 
 <script>
-    // HEADER SCROLL ANIMATION
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
         if (window.scrollY > 50) header.classList.add('scrolled');
         else header.classList.remove('scrolled');
     });
 
-    // ACCORDION LOGIC
     document.querySelectorAll('.archive-trigger').forEach(trigger => {
         trigger.addEventListener('click', () => {
             const item = trigger.parentElement;
