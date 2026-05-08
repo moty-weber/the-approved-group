@@ -7,18 +7,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #050c1a; --gold: #d4af37; --white: #ffffff; --soft-bg: #f4f7f9; }
+        :root { --navy: #050c1a; --gold: #d4af37; --dark-gold: #b8860b; --white: #ffffff; --soft-bg: #f4f7f9; }
         body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--soft-bg); color: var(--navy); line-height: 1.8; }
         
-        header { background: var(--navy); padding: 25px 0; text-align: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
-        .logo-small { width: 220px; }
-        .back-home { position: absolute; left: 30px; top: 35px; color: var(--gold); text-decoration: none; font-weight: 600; font-size: 0.85rem; border: 1px solid var(--gold); padding: 6px 16px; border-radius: 5px; transition: 0.3s; }
+        /* HEADER LOGIC LIKE HOME PAGE */
+        header { 
+            background: var(--navy); padding: 25px 0; text-align: center; 
+            border-bottom: 2px solid var(--gold); position: fixed; 
+            width: 100%; top: 0; z-index: 1000; transition: 0.4s ease;
+        }
+        header.scrolled { padding: 10px 0; background: rgba(5, 12, 26, 0.95); backdrop-filter: blur(10px); }
+        
+        .logo-small { width: 220px; transition: 0.4s; }
+        header.scrolled .logo-small { width: 160px; }
+
+        .header-slogan { 
+            color: var(--dark-gold); font-size: 0.8rem; font-weight: 600; 
+            letter-spacing: 3px; text-transform: uppercase; margin-top: 8px; 
+            transition: 0.4s; opacity: 1;
+        }
+        header.scrolled .header-slogan { opacity: 0; font-size: 0; margin: 0; }
+
+        .back-home { 
+            position: absolute; left: 30px; top: 35px; color: var(--gold); 
+            text-decoration: none; font-weight: 600; font-size: 0.8rem; 
+            border: 1px solid var(--gold); padding: 6px 16px; border-radius: 5px; 
+            transition: 0.3s; z-index: 1100;
+        }
+        header.scrolled .back-home { top: 15px; }
         .back-home:hover { background: var(--gold); color: var(--navy); }
 
         .hero-contact { 
-            background: var(--navy); color: var(--white); padding: 80px 20px; text-align: center;
+            background: var(--navy); color: var(--white); padding: 100px 20px; text-align: center;
             background-image: linear-gradient(rgba(5, 12, 26, 0.9), rgba(5, 12, 26, 0.9)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1500');
-            background-size: cover; background-position: center;
+            background-size: cover; background-position: center; margin-top: 130px;
         }
         .hero-contact h1 { font-family: 'Playfair Display'; font-size: 3.5rem; color: var(--gold); margin: 0; }
 
@@ -63,14 +85,19 @@
 
         footer { text-align: center; padding: 60px; background: var(--navy); color: #666; border-top: 2px solid var(--gold); }
 
-        @media (max-width: 768px) { .founders-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { 
+            .founders-grid { grid-template-columns: 1fr; } 
+            .hero-contact h1 { font-size: 2.5rem; }
+            .back-home { left: 10px; padding: 5px 10px; font-size: 0.7rem; }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <a href="index.html" class="back-home">← BACK TO PORTAL</a>
-    <img src="logo.png" alt="The Approved Group" class="logo-small">
+<header id="main-header">
+    <a href="index.html" class="back-home">← BACK TO HOME</a>
+    <div class="logo"><img src="logo.png" alt="The Approved Group" class="logo-small"></div>
+    <div class="header-slogan">Expert EU Citizenship Consultancy</div>
 </header>
 
 <section class="hero-contact">
@@ -89,7 +116,7 @@
     <div class="founders-grid">
         
         <div class="founder-card">
-            <div class="founder-img" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1000');"></div>
+            <div class="founder-img" style="background-image: url('https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?auto=format&fit=crop&q=80&w=1000');"></div>
             <div class="founder-info">
                 <h3>Moishe Weiss</h3>
                 <span class="founder-role">Co-Founder & Operations Lead</span>
@@ -109,7 +136,7 @@
         </div>
 
         <div class="founder-card">
-            <div class="founder-img" style="background-image: url('https://images.unsplash.com/photo-1521791136366-39853752c0e7?auto=format&fit=crop&q=80&w=1000');"></div>
+            <div class="founder-img" style="background-image: url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=1000');"></div>
             <div class="founder-info">
                 <h3>Boruch Goldstein</h3>
                 <span class="founder-role">Co-Founder & Legal Strategy</span>
@@ -135,6 +162,18 @@
 <footer>
     <p>&copy; 2026 THE APPROVED FOUNDATION | FOUNDERS DIRECTORY</p>
 </footer>
+
+<script>
+    // Header Scroll Animation
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('main-header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>
 
 </body>
 </html>
