@@ -31,28 +31,6 @@
 
         body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--soft-bg); overflow-x: hidden; scroll-behavior: smooth; }
         
-        #maintenance-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--primary-blue); z-index: 99999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; color: white; transition: 0.5s;
-        }
-        #maintenance-overlay img { width: 280px; margin-bottom: 30px; filter: brightness(1.2); }
-        #maintenance-overlay h1 { font-family: 'Playfair Display', serif; color: var(--accent-gold); font-size: 2.8rem; margin: 0 0 15px 0; }
-        #maintenance-overlay p { font-size: 1.1rem; color: #cbd5e0; max-width: 550px; line-height: 1.6; padding: 0 20px; }
-        .pin-box { margin-top: 40px; }
-        .pin-box input { 
-            padding: 15px; border-radius: 50px; border: 1px solid var(--accent-gold); 
-            background: rgba(255,255,255,0.05); color: white; text-align: center; 
-            font-size: 1.1rem; outline: none; width: 220px; margin-bottom: 20px;
-        }
-        .pin-btn { 
-            background: var(--accent-gold); color: var(--primary-blue); border: none; 
-            padding: 12px 50px; border-radius: 50px; font-weight: bold; cursor: pointer; 
-            text-transform: uppercase; transition: 0.3s; 
-        }
-        .pin-btn:hover { background: white; }
-
         header { 
             background: var(--navy-shiny); padding: 25px 0; text-align: center; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-bottom: 2px solid var(--accent-gold); 
@@ -151,19 +129,6 @@
 </head>
 <body onload="checkSavedSession()">
 
-<div id="maintenance-overlay">
-    <img src="logo.png" alt="The Approved Group">
-    <h1>Portal Under Verification</h1>
-    <p>Our digital infrastructure is currently undergoing a security audit. <br> 
-    <b>Authorized access only.</b></p>
-    <div class="pin-box">
-        <input type="password" id="portal-pin" placeholder="Enter Access PIN">
-        <br>
-        <button class="pin-btn" onclick="validateEntry()">Enter Portal</button>
-        <p id="pin-error" style="color: #ff4d4d; margin-top: 15px; display: none; font-weight: bold;">Access Denied. Invalid PIN.</p>
-    </div>
-</div>
-
 <div class="top-btn-container left-side">
     <a href="guide.pdf" download class="luxury-btn"><i class="fas fa-file-download"></i> PDF GUIDE</a>
 </div>
@@ -256,21 +221,6 @@
         window.open(url, '_blank');
     }
 
-    const LOCK_ACTIVE = false; 
-    const MASTER_PIN = "7814375"; 
-
-    function validateEntry() {
-        const input = document.getElementById('portal-pin').value;
-        if (input === MASTER_PIN) {
-            document.getElementById('maintenance-overlay').style.opacity = '0';
-            setTimeout(() => { document.getElementById('maintenance-overlay').style.display = 'none'; }, 500);
-            sessionStorage.setItem("access_granted", "true");
-        } else {
-            document.getElementById('pin-error').style.display = 'block';
-            document.getElementById('portal-pin').value = '';
-        }
-    }
-
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
         if (window.scrollY > 50) header.classList.add('scrolled');
@@ -279,9 +229,6 @@
 
     let secretGeneratedCode;
     function checkSavedSession() {
-        if (!LOCK_ACTIVE || sessionStorage.getItem("access_granted") === "true") {
-            document.getElementById('maintenance-overlay').style.display = 'none';
-        }
         const savedEmail = localStorage.getItem("user_email");
         if (savedEmail) applyVerification(savedEmail);
     }
@@ -290,7 +237,7 @@
         const email = document.getElementById('h_email_field').value;
         if(!email || !email.includes('@')) { alert("Valid email address required."); return; }
         secretGeneratedCode = Math.floor(100000 + Math.random() * 900000);
-        emailjs.send("service_tls7kck", "template_mfhx2ka", { to_email: email, code: secretGeneratedCode })
+        emailjs.send("service_lb6bhaq", "template_4kmjvj7", { to_email: email, code: secretGeneratedCode })
         .then(() => {
             document.getElementById('v-step-1').style.display = 'none';
             document.getElementById('v-step-2').style.display = 'flex';
