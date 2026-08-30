@@ -49,6 +49,133 @@
 
         body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--soft-bg); overflow-x: hidden; scroll-behavior: smooth; }
         
+        /* OVERLAY / SITE CLOSED STYLING */
+        #site-closed-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--navy-shiny) 100%);
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .closed-content {
+            margin: auto;
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .closed-logo-frame {
+            width: 100%;
+            max-width: 350px;
+            height: 100px;
+            border: none;
+            margin-bottom: 25px;
+        }
+
+        .closed-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .closed-subtitle {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .contact-buttons-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .contact-btn {
+            background: transparent;
+            color: var(--accent-gold);
+            border: 2px solid var(--accent-gold);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* MINI ACCESS CODE WIDGET */
+        .access-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 6px 12px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .access-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--accent-gold);
+            font-size: 0.75rem;
+            width: 110px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .access-box input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: normal;
+        }
+
+        .access-box button {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            border: none;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .access-box button:hover {
+            background: #fff;
+        }
+
+        /* EXISTING WEBSITE STYLES */
         header { 
             background: var(--navy-shiny); padding: 25px 0; text-align: center; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-bottom: 2px solid var(--accent-gold); 
@@ -104,6 +231,25 @@
     </style>
 </head>
 <body onload="checkSavedSession()">
+
+<div id="site-closed-overlay">
+    <div class="closed-content">
+        <iframe src="logo.html" class="closed-logo-frame" title="Logo"></iframe>
+
+        <h1 class="closed-title">Website Is Currently Closed</h1>
+        <p class="closed-subtitle">We are currently updating our portal to serve you better. For urgent inquiries or consultations, please contact us directly.</p>
+
+        <div class="contact-buttons-container">
+            <a href="mailto:info@approvedeu.com" class="contact-btn"><i class="fas fa-envelope"></i> info@approvedeu.com</a>
+            <a href="tel:+32470912705" class="contact-btn"><i class="fas fa-phone-alt"></i> +32 470 91 27 05</a>
+        </div>
+    </div>
+
+    <div class="access-box">
+        <input type="password" id="site-pass-code" placeholder="Passcode" maxlength="10">
+        <button onclick="unlockSite()">Enter</button>
+    </div>
+</div>
 
 <div class="top-btn-container left-side">
     <a href="guide.pdf" download class="luxury-btn"><i class="fas fa-file-download"></i> PDF GUIDE</a>
@@ -165,6 +311,23 @@
 <noscript>Powered by <a href="https://www.smartsupp.com" target="_blank">Smartsupp</a></noscript>
 
 <script>
+    // UNLOCK SITE FUNCTIONALITY
+    function unlockSite() {
+        const inputVal = document.getElementById('site-pass-code').value.trim();
+        if (inputVal === "6559154") {
+            document.getElementById('site-closed-overlay').style.display = 'none';
+        } else {
+            alert("Incorrect passcode.");
+        }
+    }
+
+    // ENTER KEY UNLOCK SUPPORT
+    document.getElementById('site-pass-code')?.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            unlockSite();
+        }
+    });
+
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
         if (window.scrollY > 50) header.classList.add('scrolled');
