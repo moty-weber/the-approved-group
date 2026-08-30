@@ -22,7 +22,6 @@
     var _smartsupp = _smartsupp || {};
     _smartsupp.key = 'adfa0d91298f8cf7e8f066474ef7b18a0da2817b';
 
-    // Customizing colors to match Approved EU brand
     _smartsupp.customColors = {
       primary: '#d4af37', // Gold
       secondary: '#050c1a' // Dark Navy
@@ -76,17 +75,17 @@
             align-items: center;
         }
 
-        .closed-logo-frame {
-            width: 100%;
-            max-width: 350px;
-            height: 100px;
-            border: none;
+        .closed-logo {
+            width: 280px;
+            max-width: 80vw;
+            height: auto;
             margin-bottom: 25px;
+            filter: brightness(1.1);
         }
 
         .closed-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             color: var(--accent-gold);
             margin-bottom: 15px;
             letter-spacing: 1px;
@@ -94,7 +93,7 @@
         }
 
         .closed-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #e0e0e0;
             margin-bottom: 35px;
             line-height: 1.6;
@@ -232,9 +231,11 @@
 </head>
 <body onload="checkSavedSession()">
 
+<!-- OVERLAY FOR CLOSED WEBSITE -->
 <div id="site-closed-overlay">
     <div class="closed-content">
-        <iframe src="logo.html" class="closed-logo-frame" title="Logo"></iframe>
+        <!-- Logo Image -->
+        <img src="logo.png" alt="The Approved Group" class="closed-logo">
 
         <h1 class="closed-title">Website Is Currently Closed</h1>
         <p class="closed-subtitle">We are currently updating our portal to serve you better. For urgent inquiries or consultations, please contact us directly.</p>
@@ -245,6 +246,7 @@
         </div>
     </div>
 
+    <!-- Small unlock input at bottom -->
     <div class="access-box">
         <input type="password" id="site-pass-code" placeholder="Passcode" maxlength="10">
         <button onclick="unlockSite()">Enter</button>
