@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import Icon from '../components/Icon.jsx';
 
-const NAV = [['/', 'Home'], ['/services', 'Services'], ['/family-tree', 'Family Tree'], ['/about', 'About'], ['/guide', 'Guide'], ['/pay', 'Payment'], ['/contact', 'Contact']];
+const NAV = [['/', 'Home'], ['/services', 'Services'], ['/family-tree', 'Start Application'], ['/about', 'About'], ['/guide', 'Guide'], ['/pay', 'Payment'], ['/contact', 'Contact']];
 function useSmartsupp() {
   useEffect(() => {
     if (window.smartsupp) return;
@@ -47,10 +47,9 @@ export default function PublicLayout() {
             <a href="tel:+32470912705">+32 470 91 27 05</a>
             <a href="tel:+32492617249">+32 492 61 72 49</a>
             <a href="/guide.pdf" target="_blank" rel="noopener">PDF guide</a>
-            <Link to="/app">Staff login</Link>
           </div>
         </div>
-        <div className="bottom">© {new Date().getFullYear()} The Approved Group. All rights reserved.</div>
+        <div className="bottom">© {new Date().getFullYear()} The Approved Group. All rights reserved. <Link to="/app" className="team-login">Team login</Link></div>
       </footer>
     </>
   );

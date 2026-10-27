@@ -8,7 +8,15 @@ import { savedEmail } from './emailjs.js';
 export function Inquiry() {
   const [email, setEmail] = useState(savedEmail());
   const [err, setErr] = useState('');
-  const onSubmit = e => { if (!email) { e.preventDefault(); setErr('Please verify your email first!'); } };
+  const onSubmit = e => {
+    if (!email) { e.preventDefault(); setErr('Please verify your email first!'); return; }
+    // also file it in the team's Requests inbox (the form itself still posts to the original Formspree address)
+    try {
+      const fd = new FormData(e.currentTarget);
+      const body = JSON.stringify({ kind: 'inquiry', name: fd.get('name'), email, phone: fd.get('phone'), objective: fd.get('objective'), message: fd.get('message'), source: 'home-inquiry' });
+      navigator.sendBeacon('/api/requests', new Blob([body], { type: 'text/plain' }));
+    } catch { /* the Formspree post still goes */ }
+  };
   return (
     <div className="card inquiry" id="inquiry">
       <div className="eyebrow">Confidential inquiry</div>
@@ -41,14 +49,23 @@ export default function Home() {
   return (
     <>
       <SiteGate />
-      <section className="hero">
+      <section className="hero intro">
         <video autoPlay muted loop playsInline preload="metadata" poster="/preview.png"><source src="/hero-video.mp4" type="video/mp4" /></video>
         <div className="in">
-          <div className="eyebrow">Expert EU Citizenship Consultancy</div>
-          <h1>Your ancestry is a legal key to the European Union.</h1>
-          <p>Secure your future in Europe with The Approved Group — premier consultancy for EU citizenship by ancestry and residency applications.</p>
-          <div className="row">
-            <Link className="btn gold" to="/family-tree"><Icon name="tree" /> Build your family tree</Link>
+          <div className="intro-logo" role="img" aria-label="The Approved Group">
+            <span className="em"><img src="/logo-emblem.webp" alt="" width="328" height="300" /></span>
+            <span className="wm"><img src="/logo-wordmark.webp" alt="" width="859" height="300" /><i className="shine" aria-hidden="true" /></span>
+          </div>
+          <p className="intro-tag">A global organization dedicated to the restitution of Jewish heritage and EU citizenship rights.</p>
+          <h1 className="intro-h">Your ancestry is a legal key to the European Union.</h1>
+          <ul className="intro-lines">
+            <li><Icon name="globe" size={16} /> EU citizenship by ancestry</li>
+            <li><Icon name="home" size={16} /> EU residency &amp; work permits</li>
+            <li><Icon name="book" size={16} /> Archival research &amp; family trees</li>
+            <li><Icon name="scale" size={16} /> Legal consultation, start to finish</li>
+          </ul>
+          <div className="row intro-cta">
+            <Link className="btn gold" to="/family-tree"><Icon name="tree" /> Start your application</Link>
             <a className="btn" href="#inquiry" style={{ background: 'transparent', color: '#fff', borderColor: 'rgba(255,255,255,.4)' }}>Confidential inquiry</a>
           </div>
         </div>
@@ -65,6 +82,17 @@ export default function Home() {
           <div className="svc"><div className="ic"><Icon name="scale" /></div><h3>Legal Consultation</h3><p>A clear strategy for your file before you collect a single document.</p></div>
         </div>
         <div style={{ marginTop: 22 }}><Link to="/services" className="btn">All services & countries →</Link></div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="card apply-cta">
+          <div>
+            <div className="eyebrow">Start here</div>
+            <h2 style={{ margin: '6px 0 8px' }}>Family Tree Request</h2>
+            <p className="muted" style={{ margin: 0 }}>Enter your name and the direct branch that connects you to Europe — parents, grandparents, great-grandparents. Your request goes straight to our team, and we contact you with the next steps.</p>
+          </div>
+          <Link className="btn gold" to="/family-tree"><Icon name="tree" /> Send a request</Link>
+        </div>
       </section>
 
       <section className="dark">

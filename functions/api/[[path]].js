@@ -192,7 +192,7 @@ async function handle(req, env) {
 
   // ---- public site gate (the original "Website Is Currently Closed" overlay, now checked server-side) ----
   if (parts[0] === 'site') {
-    const closed = (await getSetting(env, 'site_closed', '1')) === '1';
+    const closed = (await getSetting(env, 'site_closed', '0')) === '1';
     if (m === 'GET' && parts.length === 1) return json({ closed, unlocked: cookies(req).aeg_site === 'ok' });
     if (m === 'POST' && parts[1] === 'unlock') {
       const b = await req.json().catch(() => ({}));
@@ -210,6 +210,33 @@ async function handle(req, env) {
       if (b.code) await env.DB.prepare('INSERT INTO settings (k,v) VALUES (\'site_code\',?) ON CONFLICT(k) DO UPDATE SET v=excluded.v').bind(String(b.code).slice(0, 20)).run();
       return json({ ok: true });
     }
+  }
+
+
+  // ---- public family-tree / inquiry requests (the public "Family Tree Request" page; staff see them in /app/requests) ----
+  if (parts[0] === 'requests' && parts.length === 1 && m === 'POST') {
+    const raw = await req.text();
+    if (raw.length > 30000) return err(413, 'Request too large');
+    let b; try { b = JSON.parse(raw); } catch { return err(400, 'Bad request'); }
+    if (b.website) return json({ ok: true }); // honeypot
+    const s = (v, n = 200) => String(v == null ? '' : v).trim().slice(0, n);
+    const name = s(b.name, 120), email = s(b.email, 160).toLowerCase(), phone = s(b.phone, 60);
+    if (!name || !email.includes('@')) return err(400, 'Name and a verified email are required');
+    const hour = now() - 3600000;
+    const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM requests WHERE ip=? AND created>?').bind(ip, hour).first();
+    if (n && n.n >= 10) return err(429, 'Too many requests from this connection. Please try again later.');
+    const tree = {}; const t = b.tree || {};
+    for (const k of Object.keys(t).slice(0, 80)) if (/^L[1-4](_[1-8])?_(name|dob|pob|dom|sex)$/.test(k)) { const v = s(t[k], 160); if (v) tree[k] = v; }
+    const data = { tree, message: s(b.message, 4000), country: s(b.country, 10), kind: b.kind === 'inquiry' ? 'inquiry' : 'family_tree', objective: s(b.objective, 40), source: s(b.source, 40), emailed: b.emailed === true };
+    const id = rid();
+    await env.DB.prepare('INSERT INTO requests (id,created,status,name,email,phone,data,project_id,ip) VALUES (?,?,?,?,?,?,?,?,?)')
+      .bind(id, now(), 'new', name, email, phone, JSON.stringify(data), null, ip).run();
+    return json({ ok: true, id });
+  }
+  if (parts[0] === 'requests' && parts[2] === 'emailed' && m === 'POST') {
+    // the browser confirms the team email went out (EmailJS); marks the row, nothing else
+    await env.DB.prepare("UPDATE requests SET data=json_set(data,'$.emailed',json('true')) WHERE id=? AND created>?").bind(parts[1], now() - 3600000).run();
+    return json({ ok: true });
   }
 
   // ---- auth ----
@@ -248,6 +275,28 @@ async function handle(req, env) {
   if (parts[0] === 'me') return user ? json(user) : err(401, 'Not signed in');
   if (!user) return err(401, 'Not signed in');
   const who = user.name || user.email;
+
+
+  // ---- requests inbox (staff) ----
+  if (parts[0] === 'requests') {
+    const out = r => ({ ...r, data: JSON.parse(r.data || '{}'), ip: undefined });
+    if (m === 'GET' && parts.length === 1) {
+      const rows = (await env.DB.prepare('SELECT * FROM requests ORDER BY created DESC LIMIT 500').all()).results;
+      return json(rows.map(out));
+    }
+    const r = await env.DB.prepare('SELECT * FROM requests WHERE id=?').bind(parts[1] || '').first();
+    if (!r) return err(404, 'Request not found');
+    if (m === 'GET' && parts.length === 2) return json(out(r));
+    if (m === 'PUT' && parts.length === 2) {
+      const b = await req.json();
+      const status = ['new', 'seen', 'converted', 'closed'].includes(b.status) ? b.status : r.status;
+      const d = JSON.parse(r.data || '{}'); if (b.note !== undefined) d.note = String(b.note).slice(0, 4000);
+      await env.DB.prepare('UPDATE requests SET status=?, data=? WHERE id=?').bind(status, JSON.stringify(d), r.id).run();
+      return json({ ok: true });
+    }
+    if (m === 'DELETE' && parts.length === 2) { await env.DB.prepare('DELETE FROM requests WHERE id=?').bind(r.id).run(); return json({ ok: true }); }
+    return err(404, 'Not found');
+  }
 
   // ---- users ----
   if (parts[0] === 'users') {
@@ -308,6 +357,13 @@ async function handle(req, env) {
         .bind(id, String(b.name || 'New project').slice(0, 120), 'new', JSON.stringify(b.data || {}), rid(24), 0, t, t, user.id).run();
       if (b.ops) await applyOps(env, id, b.ops, who, false);
       await log(env, id, who, 'Project created');
+      if (b.from_request) {
+        const rq = await env.DB.prepare('SELECT id,name,created FROM requests WHERE id=?').bind(String(b.from_request)).first();
+        if (rq) {
+          await env.DB.prepare("UPDATE requests SET status='converted', project_id=? WHERE id=?").bind(id, rq.id).run();
+          await log(env, id, who, `Created from the website request of ${rq.name} (${new Date(rq.created).toISOString().slice(0, 10)})`);
+        }
+      }
       return json(await bundle(env, id, false));
     }
     const pid = parts[1];

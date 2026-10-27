@@ -85,12 +85,12 @@ export default function CaseTab({ ctx, toast, line, onSelect }) {
 
       <div className="card" style={{ padding: 16, marginBottom: 14 }}>
         <h3 style={{ fontFamily: 'var(--font)', fontSize: '1.05em' }}>Client link</h3>
-        <p className="hint" style={{ marginTop: 0 }}>Send the family a private link: they can fill in their own branch and upload documents — no login. They cannot see internal notes, activity or other projects, and cannot delete anything.</p>
+        <p className="hint" style={{ marginTop: 0 }}>Send the family a private link: they can fill in their own branch and upload documents — no login. They cannot see internal notes, activity or other projects, and cannot delete anything. Off by default — documents are normally filled in by the team only.</p>
         {p.client_enabled ? <>
           <div className="row"><input className="input" readOnly value={clientUrl} style={{ flex: 1 }} onFocus={e => e.target.select()} aria-label="Client link" /><button className="btn sm" onClick={() => { navigator.clipboard?.writeText(clientUrl); toast('Link copied'); }}><Icon name="copy" size={15} /> Copy</button>
             <a className="btn sm" href={`https://wa.me/?text=${encodeURIComponent('Your family tree for The Approved Group: ' + clientUrl)}`} target="_blank" rel="noopener"><Icon name="chat" size={15} /> WhatsApp</a></div>
           <div className="row" style={{ marginTop: 8 }}><button className="btn sm" onClick={() => setClient(false)}>Switch off</button><button className="btn sm ghost" onClick={() => confirm('Make a new link? The old one stops working.') && setClient(true, true)}>New link</button></div>
-        </> : <button className="btn gold sm" onClick={() => setClient(true)}><Icon name="link" size={15} /> Switch on client link</button>}
+        </> : <button className="btn sm" onClick={() => setClient(true)}><Icon name="link" size={15} /> Switch on client link</button>}
       </div>
 
       <div className="card" style={{ padding: 16, marginBottom: 14 }}>

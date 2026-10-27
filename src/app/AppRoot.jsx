@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, Link, useParams, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, NavLink, useParams, useNavigate, useLocation } from 'react-router-dom';
 import Icon from '../components/Icon.jsx';
 import { api } from '../lib/api.js';
 import Projects from './Projects.jsx';
 import ProjectView from './ProjectView.jsx';
 import PrintView from './PrintView.jsx';
 import Settings from './Settings.jsx';
+import Requests from './Requests.jsx';
 import { useProject, useToast } from './useProject.jsx';
 
 function Login({ onDone }) {
@@ -44,9 +45,11 @@ function PrintRoute() {
 export default function AppRoot() {
   const [me, setMe] = useState(undefined);
   const [toast, toastNode] = useToast();
+  const [newReq, setNewReq] = useState(0);
   const nav = useNavigate();
   const loc = useLocation();
   useEffect(() => { api.get('/api/me').then(setMe).catch(() => setMe(null)); document.title = 'Case Manager | The Approved Group'; }, []);
+  useEffect(() => { if (me) api.get('/api/requests').then(x => setNewReq(x.filter(r => r.status === 'new').length)).catch(() => {}); }, [me]);
   if (me === undefined) return <div className="empty">Loading…</div>;
   if (!me) return <Login onDone={setMe} />;
   const logout = async () => { await api.post('/api/logout'); setMe(null); nav('/app'); };
@@ -55,6 +58,10 @@ export default function AppRoot() {
     <div className="app" style={isProject ? { height: '100dvh', overflow: 'hidden' } : null}>
       <header className="app-top no-print">
         <Link to="/app" className="brand"><img src="/logo.png" alt="" width="32" height="32" /><span><b style={{ fontSize: '.95em' }}>Approved</b><small>Case Manager</small></span></Link>
+        <nav className="app-tabs">
+          <NavLink to="/app" end className={({ isActive }) => isActive ? 'active' : ''}>Projects</NavLink>
+          <NavLink to="/app/requests" className={({ isActive }) => isActive ? 'active' : ''}>Requests{newReq > 0 && <span className="badge">{newReq}</span>}</NavLink>
+        </nav>
         <span className="spacer" />
         <Link to="/app/settings" className="btn ghost sm" title="Team & settings"><Icon name="settings" size={18} /><span className="hide-sm">{me.name || me.email}</span></Link>
         <button className="btn ghost sm" onClick={logout} title="Sign out" aria-label="Sign out"><Icon name="logout" size={18} /></button>
@@ -65,6 +72,7 @@ export default function AppRoot() {
           <Route path="p/:id" element={<ProjectRoute toast={toast} />} />
           <Route path="p/:id/print" element={<PrintRoute />} />
           <Route path="settings" element={<Settings me={me} toast={toast} />} />
+          <Route path="requests" element={<Requests toast={toast} onCount={setNewReq} />} />
         </Routes>
       </div>
       {toastNode}

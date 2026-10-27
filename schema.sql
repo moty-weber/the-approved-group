@@ -33,3 +33,8 @@ CREATE TABLE IF NOT EXISTS activity (
 CREATE INDEX IF NOT EXISTS activity_project ON activity(project_id, ts);
 CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT);
 CREATE TABLE IF NOT EXISTS login_attempts (k TEXT PRIMARY KEY, n INTEGER NOT NULL, first INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS requests (
+  id TEXT PRIMARY KEY, created INTEGER NOT NULL, status TEXT NOT NULL DEFAULT 'new', name TEXT NOT NULL, email TEXT, phone TEXT,
+  data TEXT NOT NULL DEFAULT '{}', project_id TEXT, ip TEXT
+);
+CREATE INDEX IF NOT EXISTS requests_created ON requests(created);
