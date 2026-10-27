@@ -97,13 +97,13 @@ export default function Projects({ toast }) {
       <div className="row"><input className="input" style={{ flex: 1 }} value={q} onChange={e => setQ(e.target.value)} placeholder="Search name, client, email…" aria-label="Search projects" /></div>
       <div className="filters">{FILTERS.map(([k, l]) => <button key={k} className={filter === k ? 'on' : ''} onClick={() => setFilter(k)}>{l} {list ? `(${count(k)})` : ''}</button>)}</div>
       {!list ? <div className="empty">Loading…</div> : !shown.length ? <div className="empty"><p>{list.length ? 'No projects match.' : 'No projects yet — create the first family.'}</p>{!list.length && <button className="btn gold" onClick={() => setShowNew(true)}><Icon name="plus" /> New project</button>}</div> :
-        <div className="pcards">{shown.map(p => { const c = COUNTRIES[p.data.country]; const pct = p.n_docs ? Math.round(p.n_docs_done / p.n_docs * 100) : 0; return (
+        <div className="pcards">{shown.map(p => { const c = COUNTRIES[p.data.country]; const pr = p.data.progress; const done = pr ? pr.done : p.n_docs_done, total = pr ? pr.total : p.n_docs; const pct = total ? Math.round(done / total * 100) : 0; return (
           <Link key={p.id} to={`/app/p/${p.id}`} className="card pcard">
             <div className="row" style={{ marginBottom: 6 }}><span className="chip navy">{statusLabel(p.status)}</span>{p.data.case_type === 'residency' ? <span className="chip gold">🇧🇪 Residency</span> : c ? <span className="chip gold">{c.flag} {c.name}</span> : null}{p.client_enabled && <span className="chip">client link on</span>}</div>
             <h3>{p.name}</h3>
             <div className="meta">{p.n_persons} people · {p.n_files} files · updated {ago(p.updated)}{p.data.deadline ? ` · due ${p.data.deadline}` : ''}</div>
             <div className="bar" style={{ marginTop: 10 }}><i style={{ width: pct + '%' }} /></div>
-            <div className="meta" style={{ marginTop: 4 }}>{p.n_docs_done}/{p.n_docs} documents done</div>
+            <div className="meta" style={{ marginTop: 4 }}>{total ? `${done}/${total} required documents done` : 'No checklist yet — set country & claim ancestor'}</div>
           </Link>); })}</div>}
       {showNew && <NewProject onClose={() => setShowNew(false)} onCreated={id => nav(`/app/p/${id}`)} />}
       <button className="btn gold fab no-print" onClick={() => setShowNew(true)} aria-label="New project"><Icon name="plus" /> New</button>

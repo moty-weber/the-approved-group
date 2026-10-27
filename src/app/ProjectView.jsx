@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icon.jsx';
 import TreeView from './TreeView.jsx';
@@ -29,6 +29,11 @@ export default function ProjectView({ ctx, toast, mode = 'staff' }) {
     for (const d of data.documents) if (d.person_id && d.size) { const s = m.get(d.person_id) || { need: 0, files: 0 }; s.files++; m.set(d.person_id, s); }
     return m;
   }, [reqs, data.documents]);
+  useEffect(() => { // keep a small progress snapshot on the project so the project list can show it
+    if (mode === 'client') return;
+    const pr = pdata.progress || {};
+    if (pr.done !== prog.done || pr.total !== prog.total || pr.people !== idx.P.size) { const t = setTimeout(() => ctx.updateProject({ data: { ...pdata, progress: { done: prog.done, total: prog.total, people: idx.P.size } } }), 1500); return () => clearTimeout(t); }
+  }, [prog.done, prog.total, idx.P.size]);
   const roleOf = id => id === pdata.applicant ? 'Applicant' : id === pdata.claim_ancestor ? 'Ancestor' : '';
   const readOnly = mode === 'client' ? false : false;
   const fullCtx = { ...ctx, removePerson: id => ctx.apply(opsDeletePerson(idx, id), `Deleted ${fullName(idx.P.get(id))}`) };
