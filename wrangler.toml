@@ -1,0 +1,8 @@
+name = "approved-eu"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "approved-eu-db"
+database_id = "00446f74-5736-4a5b-8998-1bc9745039fa"
